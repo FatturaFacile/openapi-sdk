@@ -1,0 +1,63 @@
+get:
+  tags:
+    - Tasks
+  summary: List tasks
+  description: Returns project tasks, assignees, and progress states.
+  operationId: listTasks
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+    - $ref: ../../components/parameters/sorting.yaml
+  responses:
+    "200":
+      description: Paginated tasks.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../components/schemas/tasks/task.yaml
+              meta:
+                $ref: ../../components/schemas/common/paginationMeta.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+
+post:
+  tags:
+    - Tasks
+  summary: Create task
+  description: Creates a new project task or activity.
+  operationId: createTask
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/tasks/taskCreateRequest.yaml
+  responses:
+    "201":
+      description: Task created.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/tasks/task.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

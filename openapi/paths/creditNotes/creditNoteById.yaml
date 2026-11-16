@@ -1,0 +1,23 @@
+get:
+  tags:
+    - Credit Notes
+  summary: Get credit note by ID
+  description: Returns complete credit note details.
+  operationId: getCreditNoteById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Credit note details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/creditNotes/creditNote.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

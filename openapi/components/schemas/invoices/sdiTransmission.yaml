@@ -1,0 +1,35 @@
+type: object
+required:
+  - status
+properties:
+  sdiIdentifier:
+    type:
+      - string
+      - "null"
+    description: Official SDI interchange transmission ID.
+    example: "12345678"
+  fileName:
+    type:
+      - string
+      - "null"
+    example: "IT12345678901_00001.xml"
+  status:
+    type: string
+    enum: [pending, transmitted, delivered, not_delivered, rejected, accepted]
+    example: "delivered"
+  receiptCode:
+    type:
+      - string
+      - "null"
+    example: "RC_OK_20261116"
+  rejectionReason:
+    type:
+      - string
+      - "null"
+    example: null
+  transmittedAt:
+    type: string
+    format: date-time
+  deliveredAt:
+    type: string
+    format: date-time

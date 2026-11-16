@@ -1,0 +1,25 @@
+type: object
+required:
+  - name
+  - customerId
+  - startDate
+properties:
+  name:
+    type: string
+    example: "ERP Modernization 2026"
+  description:
+    type:
+      - string
+      - "null"
+  customerId:
+    type: string
+    format: uuid
+  startDate:
+    type: string
+    format: date
+    example: "2026-01-01"
+  endDate:
+    type: string
+    format: date
+  budget:
+    $ref: ../common/money.yaml

@@ -1,0 +1,13 @@
+post:
+  tags:
+    - Authentication
+  summary: User logout
+  description: Invalidates current JWT session and access tokens.
+  operationId: authLogout
+  security:
+    - bearerAuth: []
+  responses:
+    "204":
+      description: Session invalidated successfully.
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml

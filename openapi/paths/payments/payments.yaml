@@ -1,0 +1,64 @@
+get:
+  tags:
+    - Payments
+  summary: List payments
+  description: Returns recorded transactions, invoice reconciliations, and payment statuses.
+  operationId: listPayments
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+    - $ref: ../../components/parameters/sorting.yaml
+  responses:
+    "200":
+      description: Paginated payments.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../components/schemas/payments/payment.yaml
+              meta:
+                $ref: ../../components/schemas/common/paginationMeta.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+
+post:
+  tags:
+    - Payments
+  summary: Record payment
+  description: Registers an installment or full invoice settlement.
+  operationId: recordPayment
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/payments/paymentCreateRequest.yaml
+  responses:
+    "201":
+      description: Payment recorded.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/payments/payment.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

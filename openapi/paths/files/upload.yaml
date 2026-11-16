@@ -1,0 +1,45 @@
+post:
+  tags:
+    - Files
+  summary: Upload file
+  description: Uploads and virus scans an attachment (PDF, XML, image, etc.) via multipart/form-data.
+  operationId: uploadFile
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          required:
+            - file
+          properties:
+            file:
+              type: string
+              format: binary
+              description: File binary stream to upload.
+            entityType:
+              type: string
+              description: Associated domain entity (e.g., invoice, quote, customer).
+              example: "invoice"
+            entityId:
+              type: string
+              format: uuid
+              description: Associated domain entity ID.
+  responses:
+    "201":
+      description: File uploaded.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/files/fileUploadResponse.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

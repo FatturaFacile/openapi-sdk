@@ -1,0 +1,20 @@
+type: object
+required:
+  - id
+  - code
+  - name
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "e3000000-0000-0000-0000-000000000001"
+  code:
+    type: string
+    description: Standard payment method code (e.g., MP05 for Italian Bonifico bancario).
+    example: "MP05"
+  name:
+    type: string
+    example: "Bank Transfer (Bonifico Bancario)"
+  isDefault:
+    type: boolean
+    default: false

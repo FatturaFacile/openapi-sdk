@@ -1,0 +1,81 @@
+get:
+  tags:
+    - Users
+  summary: Get user by ID
+  description: Returns detailed user information.
+  operationId: getUserById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: User details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/users/user.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+put:
+  tags:
+    - Users
+  summary: Update user
+  description: Modifies existing user profile or roles.
+  operationId: updateUser
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/users/userUpdateRequest.yaml
+  responses:
+    "200":
+      description: User updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/users/user.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml
+
+delete:
+  tags:
+    - Users
+  summary: Delete user
+  description: Removes user access from tenant.
+  operationId: deleteUser
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "204":
+      description: User deleted.
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

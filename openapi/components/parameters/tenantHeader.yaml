@@ -1,0 +1,8 @@
+name: X-Tenant-ID
+in: header
+required: true
+description: Target tenant identifier (UUID) for multi-tenant isolation.
+schema:
+  type: string
+  format: uuid
+  example: "a0000000-0000-0000-0000-000000000001"

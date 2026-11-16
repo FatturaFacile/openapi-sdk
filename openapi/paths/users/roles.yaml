@@ -1,0 +1,23 @@
+get:
+  tags:
+    - Users
+  summary: List tenant roles
+  description: Returns available RBAC roles and permissions.
+  operationId: listRoles
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  responses:
+    "200":
+      description: List of roles.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../components/schemas/users/role.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml

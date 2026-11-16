@@ -1,0 +1,56 @@
+type: object
+required:
+  - id
+  - number
+  - fiscalYear
+  - customerId
+  - invoiceId
+  - status
+  - date
+  - lines
+  - totalNet
+  - totalVat
+  - totalGross
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "c2000000-0000-0000-0000-000000000001"
+  number:
+    type: string
+    example: "NC-2026/0012"
+  fiscalYear:
+    type: integer
+    example: 2026
+  documentType:
+    type: string
+    default: "TD04"
+    example: "TD04"
+  customerId:
+    type: string
+    format: uuid
+  invoiceId:
+    type: string
+    format: uuid
+    description: Source invoice identifier being credited or corrected.
+  status:
+    type: string
+    enum: [draft, issued, sdi_transmitted, sdi_delivered, sdi_rejected, applied, cancelled]
+    example: "issued"
+  date:
+    type: string
+    format: date
+    example: "2026-11-16"
+  lines:
+    type: array
+    items:
+      $ref: ./creditNoteLine.yaml
+  totalNet:
+    $ref: ../common/money.yaml
+  totalVat:
+    $ref: ../common/money.yaml
+  totalGross:
+    $ref: ../common/money.yaml
+  createdAt:
+    type: string
+    format: date-time

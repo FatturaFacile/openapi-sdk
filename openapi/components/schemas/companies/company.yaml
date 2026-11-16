@@ -1,0 +1,54 @@
+type: object
+required:
+  - id
+  - legalName
+  - vatNumber
+  - fiscalCode
+  - address
+  - sdiRecipientCode
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "c1000000-0000-0000-0000-000000000001"
+  legalName:
+    type: string
+    example: "Fattura Facile S.r.l."
+  tradingName:
+    type:
+      - string
+      - "null"
+    example: "Fattura Facile Enterprise"
+  vatNumber:
+    type: string
+    description: Italian or European VAT identifier (Partita IVA).
+    example: "IT12345678901"
+  fiscalCode:
+    type: string
+    description: Italian Tax Code (Codice Fiscale).
+    example: "12345678901"
+  sdiRecipientCode:
+    type: string
+    description: 7-character SDI electronic billing code or 0000000 for PEC-based delivery.
+    example: "M5UXCR1"
+  pecEmail:
+    type: string
+    format: email
+    description: Certified Electronic Mail (PEC) address.
+    example: "fatturafacile@pec.it"
+  address:
+    $ref: ../common/address.yaml
+  phone:
+    type:
+      - string
+      - "null"
+    example: "+39 02 87654321"
+  email:
+    type: string
+    format: email
+    example: "info@fatturafacile.com"
+  settings:
+    $ref: ./companySettings.yaml
+  createdAt:
+    type: string
+    format: date-time

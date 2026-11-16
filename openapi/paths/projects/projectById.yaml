@@ -1,0 +1,54 @@
+get:
+  tags:
+    - Projects
+  summary: Get project by ID
+  description: Returns project status, milestones, and task summaries.
+  operationId: getProjectById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Project details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/projects/project.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+put:
+  tags:
+    - Projects
+  summary: Update project
+  description: Updates project metadata, status, or dates.
+  operationId: updateProject
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/projects/projectCreateRequest.yaml
+  responses:
+    "200":
+      description: Project updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/projects/project.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

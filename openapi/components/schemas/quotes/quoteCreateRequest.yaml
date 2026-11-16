@@ -1,0 +1,25 @@
+type: object
+required:
+  - customerId
+  - date
+  - lines
+properties:
+  customerId:
+    type: string
+    format: uuid
+  date:
+    type: string
+    format: date
+    example: "2026-11-16"
+  validUntil:
+    type: string
+    format: date
+    example: "2026-12-16"
+  lines:
+    type: array
+    items:
+      $ref: ./quoteLine.yaml
+  notes:
+    type:
+      - string
+      - "null"

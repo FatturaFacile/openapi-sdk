@@ -1,0 +1,5 @@
+description: Internal Server Error - An unexpected system error occurred on the server.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/common/problemDetails.yaml

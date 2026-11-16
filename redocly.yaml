@@ -1,0 +1,22 @@
+apis:
+  fatturafacile-v1:
+    root: openapi/openapi.yaml
+    rules:
+      operation-operationId-unique: error
+      operation-summary: error
+      operation-description: warn
+      operation-2xx-response: error
+      operation-4xx-response: error
+      operation-singular-tag: off
+      no-unresolved-refs: error
+      no-identical-paths: error
+      no-ambiguous-paths: error
+      path-declaration-must-exist: error
+      path-not-include-query: error
+      parameter-description: warn
+      tag-description: warn
+      security-defined: error
+    output: openapi/bundled/openapi.json
+
+extends:
+  - recommended

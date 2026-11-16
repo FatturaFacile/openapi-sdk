@@ -1,0 +1,63 @@
+get:
+  tags:
+    - Projects
+  summary: List projects
+  description: Returns customer projects, deadlines, and budget tracking.
+  operationId: listProjects
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+    - $ref: ../../components/parameters/sorting.yaml
+  responses:
+    "200":
+      description: Paginated projects.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../components/schemas/projects/project.yaml
+              meta:
+                $ref: ../../components/schemas/common/paginationMeta.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+
+post:
+  tags:
+    - Projects
+  summary: Create project
+  description: Starts a new project with milestones and budget allocation.
+  operationId: createProject
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/projects/projectCreateRequest.yaml
+  responses:
+    "201":
+      description: Project created.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/projects/project.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

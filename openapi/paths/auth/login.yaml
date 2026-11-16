@@ -1,0 +1,26 @@
+post:
+  tags:
+    - Authentication
+  summary: User authentication
+  description: Authenticates user credentials and returns JWT access and refresh tokens.
+  operationId: authLogin
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/auth/loginRequest.yaml
+  responses:
+    "200":
+      description: Authentication successful.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/auth/loginResponse.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

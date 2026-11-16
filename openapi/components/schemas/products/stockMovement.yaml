@@ -1,0 +1,34 @@
+type: object
+required:
+  - id
+  - productId
+  - quantity
+  - type
+  - createdAt
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "d6000000-0000-0000-0000-000000000001"
+  productId:
+    type: string
+    format: uuid
+  type:
+    type: string
+    enum: [inbound, outbound, adjustment, return]
+    example: "inbound"
+  quantity:
+    type: number
+    example: 20
+  reference:
+    type:
+      - string
+      - "null"
+    example: "PO-2026-0891"
+  notes:
+    type:
+      - string
+      - "null"
+  createdAt:
+    type: string
+    format: date-time

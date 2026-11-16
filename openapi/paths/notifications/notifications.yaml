@@ -1,0 +1,31 @@
+get:
+  tags:
+    - Notifications
+  summary: List notifications
+  description: Returns activity stream and alerts for the authenticated user.
+  operationId: listNotifications
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+  responses:
+    "200":
+      description: Paginated notifications.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../components/schemas/notifications/notification.yaml
+              meta:
+                $ref: ../../components/schemas/common/paginationMeta.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml

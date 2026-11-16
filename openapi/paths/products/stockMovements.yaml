@@ -1,0 +1,66 @@
+get:
+  tags:
+    - Products
+  summary: List stock movements
+  description: Returns inventory audit trail and stock adjustments.
+  operationId: listStockMovements
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+  responses:
+    "200":
+      description: Stock movements.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../components/schemas/products/stockMovement.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+
+post:
+  tags:
+    - Products
+  summary: Record stock movement
+  description: Adjusts inventory stock for a product.
+  operationId: recordStockMovement
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - productId
+            - type
+            - quantity
+          properties:
+            productId:
+              type: string
+              format: uuid
+            type:
+              type: string
+              enum: [inbound, outbound, adjustment, return]
+            quantity:
+              type: number
+            reference:
+              type: string
+  responses:
+    "201":
+      description: Movement recorded.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/products/stockMovement.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml

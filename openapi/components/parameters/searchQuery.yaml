@@ -1,0 +1,7 @@
+name: q
+in: query
+required: false
+description: Full-text search term to filter records across searchable attributes.
+schema:
+  type: string
+  example: "Acme Corp"

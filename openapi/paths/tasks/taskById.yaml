@@ -1,0 +1,54 @@
+get:
+  tags:
+    - Tasks
+  summary: Get task by ID
+  description: Returns task details and logged time entries.
+  operationId: getTaskById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Task details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/tasks/task.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+put:
+  tags:
+    - Tasks
+  summary: Update task
+  description: Updates task status, priority, or assignee.
+  operationId: updateTask
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/tasks/taskCreateRequest.yaml
+  responses:
+    "200":
+      description: Task updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/tasks/task.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

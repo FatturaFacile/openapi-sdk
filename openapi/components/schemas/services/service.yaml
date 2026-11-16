@@ -1,0 +1,38 @@
+type: object
+required:
+  - id
+  - code
+  - name
+  - hourlyRate
+  - vatRate
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "e1000000-0000-0000-0000-000000000001"
+  code:
+    type: string
+    example: "SRV-CONS-CLOUD"
+  name:
+    type: string
+    example: "Cloud Infrastructure Consulting"
+  description:
+    type:
+      - string
+      - "null"
+    example: "Senior Cloud & DevOps Architectural Advisory"
+  hourlyRate:
+    $ref: ../common/money.yaml
+  vatRate:
+    type: number
+    example: 22.0
+  billingUnit:
+    type: string
+    default: "hour"
+    example: "hour"
+  isActive:
+    type: boolean
+    default: true
+  createdAt:
+    type: string
+    format: date-time

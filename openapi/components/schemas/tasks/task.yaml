@@ -1,0 +1,43 @@
+type: object
+required:
+  - id
+  - title
+  - status
+  - priority
+  - createdAt
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "d4000000-0000-0000-0000-000000000001"
+  projectId:
+    type: string
+    format: uuid
+  assigneeId:
+    type: string
+    format: uuid
+  title:
+    type: string
+    example: "Design OpenAPI 3.1 Components"
+  description:
+    type:
+      - string
+      - "null"
+  status:
+    type: string
+    enum: [todo, in_progress, review, done]
+    example: "in_progress"
+  priority:
+    type: string
+    enum: [low, medium, high, urgent]
+    example: "high"
+  dueDate:
+    type: string
+    format: date
+  timeEntries:
+    type: array
+    items:
+      $ref: ./timeEntry.yaml
+  createdAt:
+    type: string
+    format: date-time

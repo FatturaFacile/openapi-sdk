@@ -1,0 +1,40 @@
+type: object
+required:
+  - id
+  - invoiceId
+  - amount
+  - paymentMethod
+  - paymentDate
+  - status
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "e2000000-0000-0000-0000-000000000001"
+  invoiceId:
+    type: string
+    format: uuid
+  amount:
+    $ref: ../common/money.yaml
+  paymentMethod:
+    $ref: ./paymentMethod.yaml
+  paymentDate:
+    type: string
+    format: date
+    example: "2026-11-16"
+  status:
+    type: string
+    enum: [pending, completed, failed, refunded]
+    example: "completed"
+  transactionReference:
+    type:
+      - string
+      - "null"
+    example: "TRX-BANK-998822"
+  notes:
+    type:
+      - string
+      - "null"
+  createdAt:
+    type: string
+    format: date-time

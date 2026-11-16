@@ -1,0 +1,4 @@
+type: http
+scheme: bearer
+bearerFormat: JWT
+description: Standard JSON Web Token (JWT) Bearer authorization header.

@@ -1,0 +1,24 @@
+post:
+  tags:
+    - Authentication
+  summary: Refresh access token
+  description: Rotates refresh token and issues a new access token.
+  operationId: authRefresh
+  security: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/auth/tokenRefreshRequest.yaml
+  responses:
+    "200":
+      description: Token refreshed successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/auth/loginResponse.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml

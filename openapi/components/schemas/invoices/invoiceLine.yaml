@@ -1,0 +1,40 @@
+type: object
+required:
+  - description
+  - quantity
+  - unitPrice
+  - vatRate
+  - totalNet
+properties:
+  id:
+    type: string
+    format: uuid
+  productId:
+    type: string
+    format: uuid
+  serviceId:
+    type: string
+    format: uuid
+  description:
+    type: string
+    example: "Consulting Services - Architecture Review"
+  quantity:
+    type: number
+    example: 8
+  unitPrice:
+    $ref: ../common/money.yaml
+  discountPercent:
+    type: number
+    default: 0
+    example: 0
+  vatRate:
+    type: number
+    example: 22.0
+  vatNatureCode:
+    type:
+      - string
+      - "null"
+    description: Italian SDI VAT Nature exemption code (e.g., N1, N2.2, N3.1, N4) when vatRate is 0.
+    example: null
+  totalNet:
+    $ref: ../common/money.yaml

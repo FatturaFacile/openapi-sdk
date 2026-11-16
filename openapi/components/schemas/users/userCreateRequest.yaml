@@ -1,0 +1,28 @@
+type: object
+required:
+  - email
+  - firstName
+  - lastName
+  - roleIds
+properties:
+  email:
+    type: string
+    format: email
+    example: "giulia.bianchi@fatturafacile.com"
+  firstName:
+    type: string
+    example: "Giulia"
+  lastName:
+    type: string
+    example: "Bianchi"
+  phone:
+    type:
+      - string
+      - "null"
+    example: "+39 06 7654321"
+  roleIds:
+    type: array
+    items:
+      type: string
+      format: uuid
+    example: ["a2000000-0000-0000-0000-000000000001"]

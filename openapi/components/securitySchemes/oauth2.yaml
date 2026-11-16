@@ -1,0 +1,16 @@
+type: oauth2
+description: OAuth 2.0 authorization code and client credentials flows for partner integrations.
+flows:
+  clientCredentials:
+    tokenUrl: /v1/auth/oauth/token
+    scopes:
+      read: Read access to ERP resources
+      write: Write access to ERP resources
+      admin: Full tenant administration access
+  authorizationCode:
+    authorizationUrl: /v1/auth/oauth/authorize
+    tokenUrl: /v1/auth/oauth/token
+    scopes:
+      read: Read access to ERP resources
+      write: Write access to ERP resources
+      admin: Full tenant administration access

@@ -1,0 +1,11 @@
+{
+  "name": "fatturafacile-sdk",
+  "version": "1.0.0",
+  "description": "Official Vanilla JavaScript SDK for Fattura Facile ERP (Node.js & Browser)",
+  "license": "MIT",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  }
+}

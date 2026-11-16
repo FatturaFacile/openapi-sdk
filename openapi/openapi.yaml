@@ -1,0 +1,204 @@
+openapi: 3.1.0
+info:
+  title: Fattura Facile ERP API
+  version: 1.0.0
+  description: >
+    Official OpenAPI 3.1.0 contract and Single Source of Truth (SSOT) for the Fattura Facile ERP ecosystem.
+    Provides complete domain coverage for fiscal electronic billing (SDI/FatturaPA), multi-tenant administration,
+    CRM, quotes, orders, inventory, payments, projects, and collaboration.
+  contact:
+    name: Fattura Facile API Platform Team
+    email: api-support@fatturafacile.com
+    url: https://fatturafacile.com/developers
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.fatturafacile.com
+    description: Production Cloud API Gateway
+  - url: https://sandbox-api.fatturafacile.com
+    description: Sandbox & SDI Simulation Testing Environment
+  - url: https://dev-api.fatturafacile.com
+    description: Development Environment
+
+tags:
+  - name: Authentication
+    description: Session tokens, refresh rotation, scoped API keys, and OAuth2 flows.
+  - name: Users
+    description: User management, tenant memberships, profile data, and RBAC permissions.
+  - name: Companies
+    description: Legal entity configuration, Italian fiscal attributes (P.IVA, SDI, PEC), and financial statistics.
+  - name: Customers
+    description: B2B/B2C client directory, electronic billing coordinates, and contacts.
+  - name: Products
+    description: Product catalog, SKU management, pricing, and multi-warehouse stock movements.
+  - name: Services
+    description: Billable consulting, service categories, and hourly rates.
+  - name: Quotes
+    description: Commercial estimates, state machines, and automated quote-to-invoice conversion.
+  - name: Invoices
+    description: Official electronic invoicing lifecycle, Italian SDI FatturaPA transmission, and PDF downloads.
+  - name: Credit Notes
+    description: Legal credit notes (TD04) linked to invoices for tax and payment adjustments.
+  - name: Payments
+    description: Multi-currency payment settlements, refunds, and bank reconciliation.
+  - name: Projects
+    description: Project milestones, customer contracts, and budget allocations.
+  - name: Tasks
+    description: Task management, time entries, and billable duration logging.
+  - name: Files
+    description: Multipart file uploads, antivirus scanning, and secure document storage.
+  - name: Notifications
+    description: Real-time user notification stream and unread status tracking.
+
+security:
+  - bearerAuth: []
+  - apiKeyAuth: []
+  - oauth2:
+      - read
+      - write
+
+paths:
+  # 1. Authentication
+  /v1/auth/login:
+    $ref: ./paths/auth/login.yaml
+  /v1/auth/logout:
+    $ref: ./paths/auth/logout.yaml
+  /v1/auth/refresh:
+    $ref: ./paths/auth/refresh.yaml
+  /v1/auth/api-keys:
+    $ref: ./paths/auth/apiKeys.yaml
+
+  # 2. Users & RBAC
+  /v1/users:
+    $ref: ./paths/users/users.yaml
+  /v1/users/{id}:
+    $ref: ./paths/users/userById.yaml
+  /v1/roles:
+    $ref: ./paths/users/roles.yaml
+  /v1/profile:
+    $ref: ./paths/users/profile.yaml
+
+  # 3. Companies & Fiscal Settings
+  /v1/companies:
+    $ref: ./paths/companies/companies.yaml
+  /v1/companies/{id}:
+    $ref: ./paths/companies/companyById.yaml
+  /v1/companies/{id}/settings:
+    $ref: ./paths/companies/companySettings.yaml
+
+  # 4. Customers
+  /v1/customers:
+    $ref: ./paths/customers/customers.yaml
+  /v1/customers/{id}:
+    $ref: ./paths/customers/customerById.yaml
+
+  # 5. Products & Inventory
+  /v1/products:
+    $ref: ./paths/products/products.yaml
+  /v1/products/{id}:
+    $ref: ./paths/products/productById.yaml
+  /v1/inventory/movements:
+    $ref: ./paths/products/stockMovements.yaml
+
+  # 6. Services
+  /v1/services:
+    $ref: ./paths/services/services.yaml
+  /v1/services/{id}:
+    $ref: ./paths/services/serviceById.yaml
+
+  # 7. Quotes
+  /v1/quotes:
+    $ref: ./paths/quotes/quotes.yaml
+  /v1/quotes/{id}:
+    $ref: ./paths/quotes/quoteById.yaml
+  /v1/quotes/{id}/convert:
+    $ref: ./paths/quotes/quoteConvert.yaml
+
+  # 8. Invoices & SDI
+  /v1/invoices:
+    $ref: ./paths/invoices/invoices.yaml
+  /v1/invoices/{id}:
+    $ref: ./paths/invoices/invoiceById.yaml
+  /v1/invoices/{id}/sdi/transmit:
+    $ref: ./paths/invoices/invoiceSdi.yaml
+  /v1/invoices/{id}/pdf:
+    $ref: ./paths/invoices/invoicePdf.yaml
+
+  # 9. Credit Notes
+  /v1/credit-notes:
+    $ref: ./paths/creditNotes/creditNotes.yaml
+  /v1/credit-notes/{id}:
+    $ref: ./paths/creditNotes/creditNoteById.yaml
+
+  # 10. Payments
+  /v1/payments:
+    $ref: ./paths/payments/payments.yaml
+  /v1/payments/{id}:
+    $ref: ./paths/payments/paymentById.yaml
+  /v1/payment-methods:
+    $ref: ./paths/payments/paymentMethods.yaml
+
+  # 11. Projects
+  /v1/projects:
+    $ref: ./paths/projects/projects.yaml
+  /v1/projects/{id}:
+    $ref: ./paths/projects/projectById.yaml
+
+  # 12. Tasks
+  /v1/tasks:
+    $ref: ./paths/tasks/tasks.yaml
+  /v1/tasks/{id}:
+    $ref: ./paths/tasks/taskById.yaml
+
+  # 13. Files
+  /v1/files/upload:
+    $ref: ./paths/files/upload.yaml
+  /v1/files/{id}:
+    $ref: ./paths/files/fileById.yaml
+
+  # 14. Notifications
+  /v1/notifications:
+    $ref: ./paths/notifications/notifications.yaml
+  /v1/notifications/{id}/read:
+    $ref: ./paths/notifications/notificationById.yaml
+
+components:
+  securitySchemes:
+    bearerAuth:
+      $ref: ./components/securitySchemes/bearerAuth.yaml
+    oauth2:
+      $ref: ./components/securitySchemes/oauth2.yaml
+    apiKeyAuth:
+      $ref: ./components/securitySchemes/apiKeyAuth.yaml
+
+  parameters:
+    tenantHeader:
+      $ref: ./components/parameters/tenantHeader.yaml
+    paginationLimit:
+      $ref: ./components/parameters/paginationLimit.yaml
+    paginationCursor:
+      $ref: ./components/parameters/paginationCursor.yaml
+    paginationPage:
+      $ref: ./components/parameters/paginationPage.yaml
+    sorting:
+      $ref: ./components/parameters/sorting.yaml
+    searchQuery:
+      $ref: ./components/parameters/searchQuery.yaml
+    idPath:
+      $ref: ./components/parameters/idPath.yaml
+
+  responses:
+    400BadRequest:
+      $ref: ./components/responses/400BadRequest.yaml
+    401Unauthorized:
+      $ref: ./components/responses/401Unauthorized.yaml
+    403Forbidden:
+      $ref: ./components/responses/403Forbidden.yaml
+    404NotFound:
+      $ref: ./components/responses/404NotFound.yaml
+    422UnprocessableEntity:
+      $ref: ./components/responses/422UnprocessableEntity.yaml
+    500InternalError:
+      $ref: ./components/responses/500InternalError.yaml

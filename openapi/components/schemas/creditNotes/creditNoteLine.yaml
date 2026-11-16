@@ -1,0 +1,21 @@
+type: object
+required:
+  - description
+  - quantity
+  - unitPrice
+  - vatRate
+  - totalNet
+properties:
+  description:
+    type: string
+    example: "Reversal of consulting fee overcharge"
+  quantity:
+    type: number
+    example: 1
+  unitPrice:
+    $ref: ../common/money.yaml
+  vatRate:
+    type: number
+    example: 22.0
+  totalNet:
+    $ref: ../common/money.yaml

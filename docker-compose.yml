@@ -1,0 +1,40 @@
+services:
+  openapi-tools:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+      - /workspace/node_modules
+    environment:
+      - NODE_ENV=development
+    command: pnpm run lint:openapi
+
+  docs-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+      - /workspace/node_modules
+    ports:
+      - "8080:8080"
+    command: pnpm run docs
+
+  sdk-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+      - /workspace/node_modules
+    command: pnpm run generate:all
+
+  test-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+      - /workspace/node_modules
+    command: pnpm test

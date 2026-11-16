@@ -1,0 +1,57 @@
+get:
+  tags:
+    - Quotes
+  summary: Get quote by ID
+  description: Returns full quote breakdown and line items.
+  operationId: getQuoteById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Quote details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/quotes/quote.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+put:
+  tags:
+    - Quotes
+  summary: Update quote
+  description: Updates lines or metadata while quote is in draft or sent status.
+  operationId: updateQuote
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/quotes/quoteCreateRequest.yaml
+  responses:
+    "200":
+      description: Quote updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/quotes/quote.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

@@ -1,0 +1,65 @@
+get:
+  tags:
+    - Products
+  summary: List products
+  description: Returns inventory catalog with pricing and stock levels.
+  operationId: listProducts
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+    - $ref: ../../components/parameters/sorting.yaml
+    - $ref: ../../components/parameters/searchQuery.yaml
+  responses:
+    "200":
+      description: Paginated product list.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../components/schemas/products/product.yaml
+              meta:
+                $ref: ../../components/schemas/common/paginationMeta.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+
+post:
+  tags:
+    - Products
+  summary: Create product
+  description: Adds a new product to the catalog.
+  operationId: createProduct
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/products/productCreateRequest.yaml
+  responses:
+    "201":
+      description: Product created.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/products/product.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

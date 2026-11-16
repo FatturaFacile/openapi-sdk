@@ -1,0 +1,65 @@
+type: object
+required:
+  - id
+  - type
+  - name
+  - address
+  - createdAt
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "c1000000-0000-0000-0000-000000000001"
+  type:
+    type: string
+    enum: [company, individual]
+    example: "company"
+  name:
+    type: string
+    example: "Tech Solutions S.p.A."
+  vatNumber:
+    type:
+      - string
+      - "null"
+    example: "IT09876543210"
+  fiscalCode:
+    type:
+      - string
+      - "null"
+    example: "09876543210"
+  sdiRecipientCode:
+    type:
+      - string
+      - "null"
+    example: "SUBM70N"
+  pecEmail:
+    type: string
+    format: email
+    example: "techsolutions@pec.it"
+  email:
+    type: string
+    format: email
+    example: "invoices@techsolutions.it"
+  phone:
+    type:
+      - string
+      - "null"
+    example: "+39 02 99887766"
+  address:
+    $ref: ../common/address.yaml
+  paymentTermsDays:
+    type: integer
+    default: 30
+    example: 60
+  notes:
+    type:
+      - string
+      - "null"
+    example: "Key enterprise account"
+  contacts:
+    type: array
+    items:
+      $ref: ./customerContact.yaml
+  createdAt:
+    type: string
+    format: date-time

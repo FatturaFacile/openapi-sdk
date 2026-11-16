@@ -1,0 +1,82 @@
+{
+  "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.10.0",
+    "generators": {
+      "typescript": {
+        "generatorName": "typescript-fetch",
+        "output": "#{cwd}/sdk/typescript",
+        "inputSpec": "#{cwd}/openapi/bundled/openapi.yaml",
+        "additionalProperties": {
+          "npmName": "@fatturafacile/sdk",
+          "npmVersion": "1.0.0",
+          "supportsES6": true,
+          "typescriptThreePlus": true,
+          "withInterfaces": true,
+          "stringEnums": true
+        }
+      },
+      "javascript": {
+        "generatorName": "javascript",
+        "output": "#{cwd}/sdk/javascript",
+        "inputSpec": "#{cwd}/openapi/bundled/openapi.yaml",
+        "additionalProperties": {
+          "projectName": "fatturafacile-sdk",
+          "projectVersion": "1.0.0",
+          "usePromises": true
+        }
+      },
+      "php": {
+        "generatorName": "php",
+        "output": "#{cwd}/sdk/php",
+        "inputSpec": "#{cwd}/openapi/bundled/openapi.yaml",
+        "additionalProperties": {
+          "packageName": "FatturaFacile\\Sdk",
+          "invokerPackage": "FatturaFacile\\Sdk",
+          "composerVendorName": "fatturafacile",
+          "composerProjectName": "sdk-php"
+        }
+      },
+      "csharp": {
+        "generatorName": "csharp",
+        "output": "#{cwd}/sdk/csharp",
+        "inputSpec": "#{cwd}/openapi/bundled/openapi.yaml",
+        "additionalProperties": {
+          "packageName": "FatturaFacile.Sdk",
+          "packageVersion": "1.0.0",
+          "targetFramework": "netstandard2.0"
+        }
+      },
+      "java": {
+        "generatorName": "java",
+        "output": "#{cwd}/sdk/java",
+        "inputSpec": "#{cwd}/openapi/bundled/openapi.yaml",
+        "additionalProperties": {
+          "groupId": "com.fatturafacile",
+          "artifactId": "sdk-java",
+          "artifactVersion": "1.0.0",
+          "library": "native"
+        }
+      },
+      "python": {
+        "generatorName": "python",
+        "output": "#{cwd}/sdk/python",
+        "inputSpec": "#{cwd}/openapi/bundled/openapi.yaml",
+        "additionalProperties": {
+          "packageName": "fatturafacile_sdk",
+          "packageVersion": "1.0.0"
+        }
+      },
+      "go": {
+        "generatorName": "go",
+        "output": "#{cwd}/sdk/go",
+        "inputSpec": "#{cwd}/openapi/bundled/openapi.yaml",
+        "additionalProperties": {
+          "packageName": "fatturafacile",
+          "packageVersion": "1.0.0"
+        }
+      }
+    }
+  }
+}

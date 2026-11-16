@@ -1,0 +1,25 @@
+type: object
+required:
+  - code
+  - name
+  - hourlyRate
+  - vatRate
+properties:
+  code:
+    type: string
+    example: "SRV-CONS-CLOUD"
+  name:
+    type: string
+    example: "Cloud Infrastructure Consulting"
+  description:
+    type:
+      - string
+      - "null"
+  hourlyRate:
+    $ref: ../common/money.yaml
+  vatRate:
+    type: number
+    example: 22.0
+  billingUnit:
+    type: string
+    default: "hour"

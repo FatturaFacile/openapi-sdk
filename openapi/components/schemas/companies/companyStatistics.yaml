@@ -1,0 +1,23 @@
+type: object
+required:
+  - totalRevenue
+  - outstandingInvoicesAmount
+  - activeCustomersCount
+  - pendingQuotesCount
+properties:
+  totalRevenue:
+    $ref: ../common/money.yaml
+  outstandingInvoicesAmount:
+    $ref: ../common/money.yaml
+  activeCustomersCount:
+    type: integer
+    example: 84
+  pendingQuotesCount:
+    type: integer
+    example: 12
+  paidInvoicesCount:
+    type: integer
+    example: 320
+  overdueInvoicesCount:
+    type: integer
+    example: 5

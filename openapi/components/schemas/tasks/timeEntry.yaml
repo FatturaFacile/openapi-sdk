@@ -1,0 +1,30 @@
+type: object
+required:
+  - id
+  - userId
+  - date
+  - minutes
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "d5000000-0000-0000-0000-000000000001"
+  userId:
+    type: string
+    format: uuid
+  date:
+    type: string
+    format: date
+    example: "2026-11-16"
+  minutes:
+    type: integer
+    description: Duration in minutes.
+    example: 180
+  description:
+    type:
+      - string
+      - "null"
+    example: "Architecture review and schema decomposition"
+  isBillable:
+    type: boolean
+    default: true

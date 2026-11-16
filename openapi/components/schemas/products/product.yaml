@@ -1,0 +1,49 @@
+type: object
+required:
+  - id
+  - sku
+  - name
+  - unitPrice
+  - vatRate
+  - stockQuantity
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "d1000000-0000-0000-0000-000000000001"
+  sku:
+    type: string
+    description: Unique Stock Keeping Unit.
+    example: "SRV-RACK-01"
+  name:
+    type: string
+    example: "Enterprise Server Rack 42U"
+  description:
+    type:
+      - string
+      - "null"
+    example: "Standard 19-inch 42U industrial rack enclosure"
+  unitPrice:
+    $ref: ../common/money.yaml
+  costPrice:
+    $ref: ../common/money.yaml
+  vatRate:
+    type: number
+    description: Standard VAT percentage rate (e.g. 22 for 22%).
+    example: 22.0
+  unitOfMeasure:
+    type: string
+    default: "pz"
+    example: "pz"
+  stockQuantity:
+    type: number
+    example: 45
+  minStockLevel:
+    type: number
+    example: 10
+  isActive:
+    type: boolean
+    default: true
+  createdAt:
+    type: string
+    format: date-time

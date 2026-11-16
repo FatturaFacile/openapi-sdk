@@ -1,0 +1,5 @@
+description: Forbidden - The authenticated user or client lacks sufficient permissions for the requested tenant or operation.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/common/problemDetails.yaml

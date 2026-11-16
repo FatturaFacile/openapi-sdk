@@ -1,0 +1,52 @@
+name: CI - OpenAPI & SDK Quality Assurance
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  validate-and-test:
+    name: Lint, Validate & Test Specifications
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.15.0
+          run_install: false
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint OpenAPI 3.1 Specification
+        run: pnpm run lint:openapi
+
+      - name: Bundle OpenAPI Specification
+        run: pnpm run bundle:openapi
+
+      - name: Detect Breaking Changes (SemVer)
+        run: pnpm run test:breaking
+
+      - name: Run Generator Pipeline
+        run: pnpm run generate:all
+
+      - name: Run Code Linter & Format Check
+        run: |
+          pnpm run lint
+          pnpm run format:check
+
+      - name: Run Vitest Contract & Validation Tests
+        run: pnpm test

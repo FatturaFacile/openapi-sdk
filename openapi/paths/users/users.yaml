@@ -1,0 +1,68 @@
+get:
+  tags:
+    - Users
+  summary: List users
+  description: Returns paginated users within the target tenant.
+  operationId: listUsers
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+    - $ref: ../../components/parameters/sorting.yaml
+    - $ref: ../../components/parameters/searchQuery.yaml
+  responses:
+    "200":
+      description: Paginated user list.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../components/schemas/users/user.yaml
+              meta:
+                $ref: ../../components/schemas/common/paginationMeta.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml
+
+post:
+  tags:
+    - Users
+  summary: Create user
+  description: Invites or creates a new user in the tenant.
+  operationId: createUser
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/users/userCreateRequest.yaml
+  responses:
+    "201":
+      description: User created successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/users/user.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

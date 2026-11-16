@@ -1,0 +1,8 @@
+type: object
+required:
+  - refreshToken
+properties:
+  refreshToken:
+    type: string
+    description: Valid refresh token issued during login.
+    example: "d9e8f7a6b5c4..."

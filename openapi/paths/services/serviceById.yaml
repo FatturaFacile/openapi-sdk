@@ -1,0 +1,73 @@
+get:
+  tags:
+    - Services
+  summary: Get service by ID
+  description: Returns details of a specific service.
+  operationId: getServiceById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Service details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/services/service.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+put:
+  tags:
+    - Services
+  summary: Update service
+  description: Modifies service pricing or billing unit.
+  operationId: updateService
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/services/serviceCreateRequest.yaml
+  responses:
+    "200":
+      description: Service updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/services/service.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+delete:
+  tags:
+    - Services
+  summary: Delete service
+  description: Deletes or archives service offering.
+  operationId: deleteService
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "204":
+      description: Service deleted.
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

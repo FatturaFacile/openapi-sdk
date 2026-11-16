@@ -1,0 +1,34 @@
+type: object
+required:
+  - sku
+  - name
+  - unitPrice
+  - vatRate
+properties:
+  sku:
+    type: string
+    example: "SRV-RACK-01"
+  name:
+    type: string
+    example: "Enterprise Server Rack 42U"
+  description:
+    type:
+      - string
+      - "null"
+    example: "Standard 19-inch 42U industrial rack enclosure"
+  unitPrice:
+    $ref: ../common/money.yaml
+  costPrice:
+    $ref: ../common/money.yaml
+  vatRate:
+    type: number
+    example: 22.0
+  unitOfMeasure:
+    type: string
+    default: "pz"
+  initialStock:
+    type: number
+    default: 0
+  minStockLevel:
+    type: number
+    default: 0

@@ -1,0 +1,34 @@
+type: object
+required:
+  - description
+  - quantity
+  - unitPrice
+  - vatRate
+  - totalNet
+properties:
+  id:
+    type: string
+    format: uuid
+  productId:
+    type: string
+    format: uuid
+  serviceId:
+    type: string
+    format: uuid
+  description:
+    type: string
+    example: "Implementation and setup of Cloud Cluster"
+  quantity:
+    type: number
+    example: 10
+  unitPrice:
+    $ref: ../common/money.yaml
+  discountPercent:
+    type: number
+    default: 0
+    example: 5.0
+  vatRate:
+    type: number
+    example: 22.0
+  totalNet:
+    $ref: ../common/money.yaml

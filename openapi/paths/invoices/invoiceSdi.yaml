@@ -1,0 +1,27 @@
+post:
+  tags:
+    - Invoices
+  summary: Transmit invoice to SDI
+  description: Triggers immediate XML FatturaPA validation and transmission to Agenzia delle Entrate via SDI.
+  operationId: transmitInvoiceToSdi
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: SDI transmission dispatched.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/invoices/sdiTransmission.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

@@ -1,0 +1,40 @@
+type: object
+required:
+  - id
+  - title
+  - message
+  - type
+  - isRead
+  - createdAt
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "f3000000-0000-0000-0000-000000000001"
+  userId:
+    type: string
+    format: uuid
+  title:
+    type: string
+    example: "SDI Delivery Confirmed"
+  message:
+    type: string
+    example: "Invoice 2026/0128 was successfully delivered by Sistema di Interscambio."
+  type:
+    type: string
+    enum: [info, success, warning, error]
+    example: "success"
+  entityType:
+    type:
+      - string
+      - "null"
+    example: "invoice"
+  entityId:
+    type: string
+    format: uuid
+  isRead:
+    type: boolean
+    default: false
+  createdAt:
+    type: string
+    format: date-time

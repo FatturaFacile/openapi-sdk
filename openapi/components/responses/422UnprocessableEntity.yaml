@@ -1,0 +1,5 @@
+description: Unprocessable Entity - Semantic or business validation failed.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/common/problemDetails.yaml

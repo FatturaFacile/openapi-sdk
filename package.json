@@ -1,0 +1,51 @@
+{
+  "name": "@fatturafacile/openapi-sdk",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for Fattura Facile ERP API contracts, multi-language SDKs, and developer tooling",
+  "license": "MIT",
+  "author": "Fattura Facile Platform Architecture Team",
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "lint:openapi": "redocly lint openapi/openapi.yaml",
+    "bundle:openapi": "tsx scripts/bundle-openapi.ts",
+    "docs": "redocly preview-docs openapi/openapi.yaml --port 8080",
+    "docs:build": "redocly build-docs openapi/openapi.yaml -o docs/dist/index.html",
+    "test:breaking": "tsx scripts/detect-breaking-changes.ts",
+    "generate:all": "pnpm run generate:zod && pnpm run generate:json-schema && pnpm run generate:mcp && pnpm run generate:collections && pnpm run generate:sdks",
+    "generate:sdks": "tsx scripts/generate-sdks.ts",
+    "generate:zod": "tsx generators/zod/index.ts",
+    "generate:json-schema": "tsx generators/json-schema/index.ts",
+    "generate:mcp": "tsx generators/mcp/index.ts",
+    "generate:collections": "tsx generators/collections/index.ts",
+    "build": "tsc --build tsconfig.json",
+    "lint": "eslint \"{scripts,generators,tests}/**/*.ts\"",
+    "lint:fix": "eslint \"{scripts,generators,tests}/**/*.ts\" --fix",
+    "format": "prettier --write \"**/*.{ts,js,json,yaml,yml,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json,yaml,yml,md}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.15.3",
+    "@redocly/cli": "^1.25.10",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "fs-extra": "^11.2.0",
+    "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "yaml": "^2.6.1",
+    "zod": "^3.24.1"
+  }
+}

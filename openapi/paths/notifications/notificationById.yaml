@@ -1,0 +1,22 @@
+patch:
+  tags:
+    - Notifications
+  summary: Mark notification as read
+  description: Updates notification read state.
+  operationId: markNotificationRead
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Notification state updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/notifications/notification.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

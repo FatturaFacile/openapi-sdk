@@ -1,0 +1,7 @@
+name: sort
+in: query
+required: false
+description: Sorting criteria (prefix with '-' for descending order, e.g., -createdAt,name).
+schema:
+  type: string
+  example: "-createdAt"

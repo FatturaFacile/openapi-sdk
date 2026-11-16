@@ -1,0 +1,92 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/dist
+/build
+/tmp
+/out-tsc
+
+# Node & Package Managers
+/node_modules
+/.pnpm-store
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Multi-Language SDK Build Artifacts & Output
+/sdk/**/dist/
+/sdk/**/build/
+/sdk/**/bin/
+/sdk/**/obj/
+/sdk/**/target/
+/sdk/**/vendor/
+/sdk/**/__pycache__/
+/sdk/**/.venv/
+/sdk/**/node_modules/
+
+# Bundled & Compiled OpenAPI Artifacts
+/openapi/bundled/
+/docs/api-bundle.*
+/docs/bundled/
+
+# Agent Sandboxing & Ephemeral Scratch
+/.sandbox/scratch/
+/.sandbox/output/
+/.sandbox/cache/
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+.history/*
+
+# Test and Coverage Artifacts
+/test-results/
+/coverage/
+
+# Certificates and Secrets
+/certs/*
+!/certs/README.md
+auth.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Local environment overrides
+.env
+.env.*
+
+# AI tools: local state, settings and scratch files
+.claude-build/
+.claude/settings.local.json
+.claude/*.local.md
+.claude/worktrees/
+.sandbox/
+*.tmp
+
+# Agent skills installed by `npx skills`: regenerated, never committed
+/skills/
+/skills-lock.json
+/.agents/
+/.continue/skills/
+/.junie/skills/
+/.claude/skills/
+/.antigravity/skills/
+/.cursor/skills/
+/.gemini/skills/
+/.agy/skills/

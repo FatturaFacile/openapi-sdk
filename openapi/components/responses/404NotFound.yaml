@@ -1,0 +1,5 @@
+description: Not Found - The requested resource does not exist in the specified tenant context.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/common/problemDetails.yaml

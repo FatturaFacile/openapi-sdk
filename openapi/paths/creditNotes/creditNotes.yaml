@@ -1,0 +1,64 @@
+get:
+  tags:
+    - Credit Notes
+  summary: List credit notes
+  description: Returns credit notes issued against existing invoices.
+  operationId: listCreditNotes
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+    - $ref: ../../components/parameters/sorting.yaml
+  responses:
+    "200":
+      description: Paginated credit notes.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../components/schemas/creditNotes/creditNote.yaml
+              meta:
+                $ref: ../../components/schemas/common/paginationMeta.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+
+post:
+  tags:
+    - Credit Notes
+  summary: Create credit note
+  description: Issues a legal credit note (TD04) to adjust or nullify an invoice.
+  operationId: createCreditNote
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/creditNotes/creditNoteCreateRequest.yaml
+  responses:
+    "201":
+      description: Credit note created.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/creditNotes/creditNote.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

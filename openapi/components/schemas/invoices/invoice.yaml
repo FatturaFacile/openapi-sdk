@@ -1,0 +1,81 @@
+type: object
+required:
+  - id
+  - number
+  - fiscalYear
+  - customerId
+  - status
+  - date
+  - dueDate
+  - lines
+  - totalNet
+  - totalVat
+  - totalGross
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "f1000000-0000-0000-0000-000000000001"
+  number:
+    type: string
+    description: Unique sequential invoice number per fiscal year.
+    example: "2026/0128"
+  fiscalYear:
+    type: integer
+    example: 2026
+  documentType:
+    type: string
+    description: Italian FatturaPA document type code (TD01 for ordinary invoice, TD24 for deferred).
+    default: "TD01"
+    example: "TD01"
+  customerId:
+    type: string
+    format: uuid
+  customer:
+    $ref: ../customers/customer.yaml
+  status:
+    type: string
+    enum:
+      [
+        draft,
+        issued,
+        sdi_transmitted,
+        sdi_delivered,
+        sdi_rejected,
+        paid,
+        partially_paid,
+        overdue,
+        cancelled
+      ]
+    example: "issued"
+  date:
+    type: string
+    format: date
+    example: "2026-11-16"
+  dueDate:
+    type: string
+    format: date
+    example: "2026-12-16"
+  lines:
+    type: array
+    items:
+      $ref: ./invoiceLine.yaml
+  totalNet:
+    $ref: ../common/money.yaml
+  totalVat:
+    $ref: ../common/money.yaml
+  totalGross:
+    $ref: ../common/money.yaml
+  paidAmount:
+    $ref: ../common/money.yaml
+  sdiTransmission:
+    $ref: ./sdiTransmission.yaml
+  pdfUrl:
+    type: string
+    format: uri
+  xmlUrl:
+    type: string
+    format: uri
+  createdAt:
+    type: string
+    format: date-time

@@ -1,0 +1,35 @@
+type: object
+required:
+  - street
+  - city
+  - postalCode
+  - countryCode
+properties:
+  street:
+    type: string
+    description: Street name and house number.
+    example: "Via Roma, 123"
+  additionalInfo:
+    type:
+      - string
+      - "null"
+    description: Additional address details (building, floor, apartment).
+    example: "Palazzo B, Piano 2"
+  city:
+    type: string
+    description: City or municipality name.
+    example: "Milano"
+  province:
+    type:
+      - string
+      - "null"
+    description: Two-letter province code (for Italian addresses) or regional subdivision.
+    example: "MI"
+  postalCode:
+    type: string
+    description: Postal code / CAP.
+    example: "20121"
+  countryCode:
+    type: string
+    description: Two-letter ISO 3166-1 alpha-2 country code.
+    example: "IT"

@@ -1,0 +1,33 @@
+type: object
+required:
+  - customerId
+  - date
+  - dueDate
+  - lines
+properties:
+  customerId:
+    type: string
+    format: uuid
+  documentType:
+    type: string
+    default: "TD01"
+    example: "TD01"
+  date:
+    type: string
+    format: date
+    example: "2026-11-16"
+  dueDate:
+    type: string
+    format: date
+    example: "2026-12-16"
+  lines:
+    type: array
+    items:
+      $ref: ./invoiceLine.yaml
+  notes:
+    type:
+      - string
+      - "null"
+  autoTransmitSdi:
+    type: boolean
+    default: false

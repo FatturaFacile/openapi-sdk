@@ -1,0 +1,53 @@
+type: object
+required:
+  - id
+  - number
+  - customerId
+  - status
+  - date
+  - lines
+  - totalNet
+  - totalVat
+  - totalGross
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "b2000000-0000-0000-0000-000000000001"
+  number:
+    type: string
+    example: "PR-2026-0042"
+  customerId:
+    type: string
+    format: uuid
+  customer:
+    $ref: ../customers/customer.yaml
+  status:
+    type: string
+    enum: [draft, sent, accepted, rejected, expired, converted]
+    example: "sent"
+  date:
+    type: string
+    format: date
+    example: "2026-11-16"
+  validUntil:
+    type: string
+    format: date
+    example: "2026-12-16"
+  lines:
+    type: array
+    items:
+      $ref: ./quoteLine.yaml
+  totalNet:
+    $ref: ../common/money.yaml
+  totalVat:
+    $ref: ../common/money.yaml
+  totalGross:
+    $ref: ../common/money.yaml
+  notes:
+    type:
+      - string
+      - "null"
+  createdAt:
+    type: string
+    format: date-time

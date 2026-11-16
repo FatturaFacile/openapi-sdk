@@ -1,0 +1,37 @@
+type: object
+required:
+  - id
+  - name
+  - keyPrefix
+  - scopes
+  - createdAt
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "b1000000-0000-0000-0000-000000000002"
+  name:
+    type: string
+    description: Human-readable name describing the integration or service.
+    example: "WooCommerce Production Sync"
+  keyPrefix:
+    type: string
+    description: First 8 characters of the key for identification.
+    example: "ff_live_"
+  secret:
+    type:
+      - string
+      - "null"
+    description: Full API key secret (only returned once upon initial creation).
+    example: "ff_live_998877665544332211"
+  scopes:
+    type: array
+    items:
+      type: string
+    example: ["invoices:read", "invoices:write", "customers:read"]
+  expiresAt:
+    type: string
+    format: date-time
+  createdAt:
+    type: string
+    format: date-time

@@ -1,0 +1,15 @@
+type: object
+required:
+  - amount
+  - currency
+properties:
+  amount:
+    type: number
+    format: double
+    description: Decimal amount with precision up to two decimal places (or fractional for unit prices).
+    example: 1250.50
+  currency:
+    type: string
+    description: Three-letter ISO 4217 currency code.
+    default: "EUR"
+    example: "EUR"

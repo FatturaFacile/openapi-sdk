@@ -1,0 +1,35 @@
+type: object
+required:
+  - id
+  - fileName
+  - mimeType
+  - fileSize
+  - downloadUrl
+  - createdAt
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "f2000000-0000-0000-0000-000000000001"
+  fileName:
+    type: string
+    example: "invoice-2026-0128.pdf"
+  mimeType:
+    type: string
+    example: "application/pdf"
+  fileSize:
+    type: integer
+    description: File size in bytes.
+    example: 245890
+  downloadUrl:
+    type: string
+    format: uri
+    example: "https://storage.fatturafacile.com/tenants/t1/files/f1"
+  checksumSha256:
+    type:
+      - string
+      - "null"
+    example: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  createdAt:
+    type: string
+    format: date-time

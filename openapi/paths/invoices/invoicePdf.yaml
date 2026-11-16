@@ -1,0 +1,24 @@
+get:
+  tags:
+    - Invoices
+  summary: Download invoice PDF
+  description: Renders and streams the official PDF document for the invoice.
+  operationId: downloadInvoicePdf
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: PDF document stream.
+      content:
+        application/pdf:
+          schema:
+            type: string
+            format: binary
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

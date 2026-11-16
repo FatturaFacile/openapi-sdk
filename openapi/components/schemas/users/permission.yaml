@@ -1,0 +1,21 @@
+type: object
+required:
+  - id
+  - code
+  - module
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "a3000000-0000-0000-0000-000000000001"
+  code:
+    type: string
+    example: "invoices.create"
+  module:
+    type: string
+    example: "invoices"
+  description:
+    type:
+      - string
+      - "null"
+    example: "Create new invoices and credit notes"

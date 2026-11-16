@@ -1,0 +1,7 @@
+name: cursor
+in: query
+required: false
+description: Opaque pagination cursor for forward navigation.
+schema:
+  type: string
+  example: "eyJpZCI6MTAwLCJjcmVhdGVkQXQiOjE3MDAwMDAwMDB9"

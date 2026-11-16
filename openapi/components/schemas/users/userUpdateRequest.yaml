@@ -1,0 +1,22 @@
+type: object
+properties:
+  firstName:
+    type: string
+    example: "Giulia"
+  lastName:
+    type: string
+    example: "Bianchi"
+  phone:
+    type:
+      - string
+      - "null"
+    example: "+39 06 7654321"
+  status:
+    type: string
+    enum: [active, suspended]
+    example: "active"
+  roleIds:
+    type: array
+    items:
+      type: string
+      format: uuid

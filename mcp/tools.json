@@ -1,0 +1,1235 @@
+[
+  {
+    "name": "authLogin",
+    "description": "Authenticates user credentials and returns JWT access and refresh tokens.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "metadata": {
+      "domain": "Authentication",
+      "httpMethod": "POST",
+      "path": "/v1/auth/login"
+    }
+  },
+  {
+    "name": "authLogout",
+    "description": "Invalidates current JWT session and access tokens.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "metadata": {
+      "domain": "Authentication",
+      "httpMethod": "POST",
+      "path": "/v1/auth/logout"
+    }
+  },
+  {
+    "name": "authRefresh",
+    "description": "Rotates refresh token and issues a new access token.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "metadata": {
+      "domain": "Authentication",
+      "httpMethod": "POST",
+      "path": "/v1/auth/refresh"
+    }
+  },
+  {
+    "name": "listApiKeys",
+    "description": "Returns active API keys for the current tenant.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Authentication",
+      "httpMethod": "GET",
+      "path": "/v1/auth/api-keys"
+    }
+  },
+  {
+    "name": "createApiKey",
+    "description": "Generates a new scoped API key for background integration.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["name", "scopes"]
+    },
+    "metadata": {
+      "domain": "Authentication",
+      "httpMethod": "POST",
+      "path": "/v1/auth/api-keys"
+    }
+  },
+  {
+    "name": "listUsers",
+    "description": "Returns paginated users within the target tenant.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Users",
+      "httpMethod": "GET",
+      "path": "/v1/users"
+    }
+  },
+  {
+    "name": "createUser",
+    "description": "Invites or creates a new user in the tenant.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Users",
+      "httpMethod": "POST",
+      "path": "/v1/users"
+    }
+  },
+  {
+    "name": "getUserById",
+    "description": "Returns detailed user information.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Users",
+      "httpMethod": "GET",
+      "path": "/v1/users/{id}"
+    }
+  },
+  {
+    "name": "updateUser",
+    "description": "Modifies existing user profile or roles.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Users",
+      "httpMethod": "PUT",
+      "path": "/v1/users/{id}"
+    }
+  },
+  {
+    "name": "deleteUser",
+    "description": "Removes user access from tenant.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Users",
+      "httpMethod": "DELETE",
+      "path": "/v1/users/{id}"
+    }
+  },
+  {
+    "name": "listRoles",
+    "description": "Returns available RBAC roles and permissions.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Users",
+      "httpMethod": "GET",
+      "path": "/v1/roles"
+    }
+  },
+  {
+    "name": "getCurrentUserProfile",
+    "description": "Returns authenticated user profile and active tenant memberships.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "metadata": {
+      "domain": "Users",
+      "httpMethod": "GET",
+      "path": "/v1/profile"
+    }
+  },
+  {
+    "name": "listCompanies",
+    "description": "Returns companies managed under user authorization.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "metadata": {
+      "domain": "Companies",
+      "httpMethod": "GET",
+      "path": "/v1/companies"
+    }
+  },
+  {
+    "name": "getCompanyById",
+    "description": "Returns legal and fiscal configuration of a company.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Companies",
+      "httpMethod": "GET",
+      "path": "/v1/companies/{id}"
+    }
+  },
+  {
+    "name": "getCompanySettings",
+    "description": "Returns fiscal regimes, bank IBAN, and SDI settings.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Companies",
+      "httpMethod": "GET",
+      "path": "/v1/companies/{id}/settings"
+    }
+  },
+  {
+    "name": "updateCompanySettings",
+    "description": "Updates fiscal and electronic billing configuration.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Companies",
+      "httpMethod": "PUT",
+      "path": "/v1/companies/{id}/settings"
+    }
+  },
+  {
+    "name": "listCustomers",
+    "description": "Returns paginated customers with optional search and category filters.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Customers",
+      "httpMethod": "GET",
+      "path": "/v1/customers"
+    }
+  },
+  {
+    "name": "createCustomer",
+    "description": "Registers a new business or individual customer.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Customers",
+      "httpMethod": "POST",
+      "path": "/v1/customers"
+    }
+  },
+  {
+    "name": "getCustomerById",
+    "description": "Returns complete customer profile, billing addresses, and contacts.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Customers",
+      "httpMethod": "GET",
+      "path": "/v1/customers/{id}"
+    }
+  },
+  {
+    "name": "updateCustomer",
+    "description": "Modifies customer data or billing settings.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Customers",
+      "httpMethod": "PUT",
+      "path": "/v1/customers/{id}"
+    }
+  },
+  {
+    "name": "deleteCustomer",
+    "description": "Soft-deletes customer record if no linked legal invoices exist.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Customers",
+      "httpMethod": "DELETE",
+      "path": "/v1/customers/{id}"
+    }
+  },
+  {
+    "name": "listProducts",
+    "description": "Returns inventory catalog with pricing and stock levels.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Products",
+      "httpMethod": "GET",
+      "path": "/v1/products"
+    }
+  },
+  {
+    "name": "createProduct",
+    "description": "Adds a new product to the catalog.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Products",
+      "httpMethod": "POST",
+      "path": "/v1/products"
+    }
+  },
+  {
+    "name": "getProductById",
+    "description": "Returns complete product details.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Products",
+      "httpMethod": "GET",
+      "path": "/v1/products/{id}"
+    }
+  },
+  {
+    "name": "updateProduct",
+    "description": "Updates pricing, metadata, or active status.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Products",
+      "httpMethod": "PUT",
+      "path": "/v1/products/{id}"
+    }
+  },
+  {
+    "name": "deleteProduct",
+    "description": "Deactivates or deletes product.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Products",
+      "httpMethod": "DELETE",
+      "path": "/v1/products/{id}"
+    }
+  },
+  {
+    "name": "listStockMovements",
+    "description": "Returns inventory audit trail and stock adjustments.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Products",
+      "httpMethod": "GET",
+      "path": "/v1/inventory/movements"
+    }
+  },
+  {
+    "name": "recordStockMovement",
+    "description": "Adjusts inventory stock for a product.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        },
+        "productId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["inbound", "outbound", "adjustment", "return"]
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "reference": {
+          "type": "string"
+        }
+      },
+      "required": ["productId", "type", "quantity"]
+    },
+    "metadata": {
+      "domain": "Products",
+      "httpMethod": "POST",
+      "path": "/v1/inventory/movements"
+    }
+  },
+  {
+    "name": "listServices",
+    "description": "Returns billable consulting, support, and hourly service offerings.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Services",
+      "httpMethod": "GET",
+      "path": "/v1/services"
+    }
+  },
+  {
+    "name": "createService",
+    "description": "Defines a new service item.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Services",
+      "httpMethod": "POST",
+      "path": "/v1/services"
+    }
+  },
+  {
+    "name": "getServiceById",
+    "description": "Returns details of a specific service.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Services",
+      "httpMethod": "GET",
+      "path": "/v1/services/{id}"
+    }
+  },
+  {
+    "name": "updateService",
+    "description": "Modifies service pricing or billing unit.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Services",
+      "httpMethod": "PUT",
+      "path": "/v1/services/{id}"
+    }
+  },
+  {
+    "name": "deleteService",
+    "description": "Deletes or archives service offering.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Services",
+      "httpMethod": "DELETE",
+      "path": "/v1/services/{id}"
+    }
+  },
+  {
+    "name": "listQuotes",
+    "description": "Returns quotes with state transitions, customer data, and line totals.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Quotes",
+      "httpMethod": "GET",
+      "path": "/v1/quotes"
+    }
+  },
+  {
+    "name": "createQuote",
+    "description": "Creates a new commercial proposal or estimate.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Quotes",
+      "httpMethod": "POST",
+      "path": "/v1/quotes"
+    }
+  },
+  {
+    "name": "getQuoteById",
+    "description": "Returns full quote breakdown and line items.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Quotes",
+      "httpMethod": "GET",
+      "path": "/v1/quotes/{id}"
+    }
+  },
+  {
+    "name": "updateQuote",
+    "description": "Updates lines or metadata while quote is in draft or sent status.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Quotes",
+      "httpMethod": "PUT",
+      "path": "/v1/quotes/{id}"
+    }
+  },
+  {
+    "name": "convertQuoteToInvoice",
+    "description": "Converts accepted quote directly into an issued invoice with identical line items.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Quotes",
+      "httpMethod": "POST",
+      "path": "/v1/quotes/{id}/convert"
+    }
+  },
+  {
+    "name": "listInvoices",
+    "description": "Returns invoices with payment status, SDI transmission receipts, and totals.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Invoices",
+      "httpMethod": "GET",
+      "path": "/v1/invoices"
+    }
+  },
+  {
+    "name": "createInvoice",
+    "description": "Generates a new legal electronic invoice with automatic sequential numbering.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Invoices",
+      "httpMethod": "POST",
+      "path": "/v1/invoices"
+    }
+  },
+  {
+    "name": "getInvoiceById",
+    "description": "Returns complete invoice data including line items, VAT breakdown, and payments.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Invoices",
+      "httpMethod": "GET",
+      "path": "/v1/invoices/{id}"
+    }
+  },
+  {
+    "name": "cancelInvoice",
+    "description": "Cancels draft invoice or initiates credit note workflow if already delivered.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Invoices",
+      "httpMethod": "DELETE",
+      "path": "/v1/invoices/{id}"
+    }
+  },
+  {
+    "name": "transmitInvoiceToSdi",
+    "description": "Triggers immediate XML FatturaPA validation and transmission to Agenzia delle Entrate via SDI.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Invoices",
+      "httpMethod": "POST",
+      "path": "/v1/invoices/{id}/sdi/transmit"
+    }
+  },
+  {
+    "name": "downloadInvoicePdf",
+    "description": "Renders and streams the official PDF document for the invoice.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Invoices",
+      "httpMethod": "GET",
+      "path": "/v1/invoices/{id}/pdf"
+    }
+  },
+  {
+    "name": "listCreditNotes",
+    "description": "Returns credit notes issued against existing invoices.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Credit Notes",
+      "httpMethod": "GET",
+      "path": "/v1/credit-notes"
+    }
+  },
+  {
+    "name": "createCreditNote",
+    "description": "Issues a legal credit note (TD04) to adjust or nullify an invoice.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Credit Notes",
+      "httpMethod": "POST",
+      "path": "/v1/credit-notes"
+    }
+  },
+  {
+    "name": "getCreditNoteById",
+    "description": "Returns complete credit note details.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Credit Notes",
+      "httpMethod": "GET",
+      "path": "/v1/credit-notes/{id}"
+    }
+  },
+  {
+    "name": "listPayments",
+    "description": "Returns recorded transactions, invoice reconciliations, and payment statuses.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Payments",
+      "httpMethod": "GET",
+      "path": "/v1/payments"
+    }
+  },
+  {
+    "name": "recordPayment",
+    "description": "Registers an installment or full invoice settlement.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Payments",
+      "httpMethod": "POST",
+      "path": "/v1/payments"
+    }
+  },
+  {
+    "name": "getPaymentById",
+    "description": "Returns payment transaction details.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Payments",
+      "httpMethod": "GET",
+      "path": "/v1/payments/{id}"
+    }
+  },
+  {
+    "name": "refundPayment",
+    "description": "Issues a partial or full refund against a recorded payment.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Payments",
+      "httpMethod": "POST",
+      "path": "/v1/payments/{id}"
+    }
+  },
+  {
+    "name": "listPaymentMethods",
+    "description": "Returns available payment modalities (Bonifico, RiBa, Credit Card, PayPal).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Payments",
+      "httpMethod": "GET",
+      "path": "/v1/payment-methods"
+    }
+  },
+  {
+    "name": "listProjects",
+    "description": "Returns customer projects, deadlines, and budget tracking.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Projects",
+      "httpMethod": "GET",
+      "path": "/v1/projects"
+    }
+  },
+  {
+    "name": "createProject",
+    "description": "Starts a new project with milestones and budget allocation.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Projects",
+      "httpMethod": "POST",
+      "path": "/v1/projects"
+    }
+  },
+  {
+    "name": "getProjectById",
+    "description": "Returns project status, milestones, and task summaries.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Projects",
+      "httpMethod": "GET",
+      "path": "/v1/projects/{id}"
+    }
+  },
+  {
+    "name": "updateProject",
+    "description": "Updates project metadata, status, or dates.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Projects",
+      "httpMethod": "PUT",
+      "path": "/v1/projects/{id}"
+    }
+  },
+  {
+    "name": "listTasks",
+    "description": "Returns project tasks, assignees, and progress states.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Tasks",
+      "httpMethod": "GET",
+      "path": "/v1/tasks"
+    }
+  },
+  {
+    "name": "createTask",
+    "description": "Creates a new project task or activity.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Tasks",
+      "httpMethod": "POST",
+      "path": "/v1/tasks"
+    }
+  },
+  {
+    "name": "getTaskById",
+    "description": "Returns task details and logged time entries.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Tasks",
+      "httpMethod": "GET",
+      "path": "/v1/tasks/{id}"
+    }
+  },
+  {
+    "name": "updateTask",
+    "description": "Updates task status, priority, or assignee.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Tasks",
+      "httpMethod": "PUT",
+      "path": "/v1/tasks/{id}"
+    }
+  },
+  {
+    "name": "uploadFile",
+    "description": "Uploads and virus scans an attachment (PDF, XML, image, etc.) via multipart/form-data.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Files",
+      "httpMethod": "POST",
+      "path": "/v1/files/upload"
+    }
+  },
+  {
+    "name": "getFileById",
+    "description": "Returns file size, MIME-type, checksum, and secure download URL.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Files",
+      "httpMethod": "GET",
+      "path": "/v1/files/{id}"
+    }
+  },
+  {
+    "name": "deleteFile",
+    "description": "Removes file attachment and deletes underlying object from storage.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Files",
+      "httpMethod": "DELETE",
+      "path": "/v1/files/{id}"
+    }
+  },
+  {
+    "name": "listNotifications",
+    "description": "Returns activity stream and alerts for the authenticated user.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Notifications",
+      "httpMethod": "GET",
+      "path": "/v1/notifications"
+    }
+  },
+  {
+    "name": "markNotificationRead",
+    "description": "Updates notification read state.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "undefined": {
+          "description": "undefined parameter: undefined",
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "metadata": {
+      "domain": "Notifications",
+      "httpMethod": "PATCH",
+      "path": "/v1/notifications/{id}/read"
+    }
+  }
+]

@@ -1,0 +1,8 @@
+name: id
+in: path
+required: true
+description: Unique resource identifier (UUID).
+schema:
+  type: string
+  format: uuid
+  example: "c1234567-89ab-cdef-0123-456789abcdef"

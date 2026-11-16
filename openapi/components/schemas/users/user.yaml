@@ -1,0 +1,42 @@
+type: object
+required:
+  - id
+  - email
+  - firstName
+  - lastName
+  - status
+  - createdAt
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "a1000000-0000-0000-0000-000000000001"
+  email:
+    type: string
+    format: email
+    example: "mario.rossi@fatturafacile.com"
+  firstName:
+    type: string
+    example: "Mario"
+  lastName:
+    type: string
+    example: "Rossi"
+  phone:
+    type:
+      - string
+      - "null"
+    example: "+39 02 1234567"
+  status:
+    type: string
+    enum: [active, suspended, invited]
+    example: "active"
+  roles:
+    type: array
+    items:
+      $ref: ./role.yaml
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time

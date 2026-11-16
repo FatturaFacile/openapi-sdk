@@ -1,0 +1,33 @@
+type: object
+required:
+  - totalItems
+  - limit
+properties:
+  totalItems:
+    type: integer
+    description: Total number of records matching the query criteria.
+    example: 142
+  totalPages:
+    type: integer
+    description: Total number of pages available.
+    example: 6
+  currentPage:
+    type: integer
+    description: Current page index (1-based).
+    example: 1
+  limit:
+    type: integer
+    description: Number of records per page.
+    example: 25
+  nextCursor:
+    type:
+      - string
+      - "null"
+    description: Cursor pointer for the next set of results.
+    example: "eyJpZCI6MTI1fQ=="
+  prevCursor:
+    type:
+      - string
+      - "null"
+    description: Cursor pointer for the previous set of results.
+    example: null

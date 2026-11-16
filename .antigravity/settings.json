@@ -1,0 +1,22 @@
+{
+  "compactThresholdPercent": 50,
+  "maxBashOutputChars": 15000,
+  "permissions": {
+    "deny": [
+      "Read(./**/node_modules/**)",
+      "Read(./**/dist/**)",
+      "Read(./**/build/**)",
+      "Read(./**/openapi/bundled/**)",
+      "Read(./**/sdk/**/dist/**)",
+      "Read(./**/sdk/**/vendor/**)",
+      "Read(./**/sdk/**/target/**)",
+      "Read(./**/sdk/**/bin/**)",
+      "Read(./**/sdk/**/obj/**)",
+      "Read(./**/test-results/**)",
+      "Read(./**/*.lock)",
+      "Read(./**/*-lock.*)",
+      "Read(./**/.env*)",
+      "Read(./**/auth.json)"
+    ]
+  }
+}

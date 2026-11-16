@@ -1,0 +1,43 @@
+type: object
+required:
+  - id
+  - name
+  - customerId
+  - status
+  - startDate
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "d2000000-0000-0000-0000-000000000001"
+  name:
+    type: string
+    example: "ERP Modernization 2026"
+  description:
+    type:
+      - string
+      - "null"
+  customerId:
+    type: string
+    format: uuid
+  status:
+    type: string
+    enum: [planning, active, on_hold, completed, cancelled]
+    example: "active"
+  startDate:
+    type: string
+    format: date
+    example: "2026-01-01"
+  endDate:
+    type: string
+    format: date
+    example: "2026-12-31"
+  budget:
+    $ref: ../common/money.yaml
+  milestones:
+    type: array
+    items:
+      $ref: ./milestone.yaml
+  createdAt:
+    type: string
+    format: date-time

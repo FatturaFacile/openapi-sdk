@@ -1,0 +1,51 @@
+type: object
+required:
+  - type
+  - name
+  - address
+properties:
+  type:
+    type: string
+    enum: [company, individual]
+    example: "company"
+  name:
+    type: string
+    example: "Tech Solutions S.p.A."
+  vatNumber:
+    type:
+      - string
+      - "null"
+    example: "IT09876543210"
+  fiscalCode:
+    type:
+      - string
+      - "null"
+    example: "09876543210"
+  sdiRecipientCode:
+    type:
+      - string
+      - "null"
+    default: "0000000"
+    example: "SUBM70N"
+  pecEmail:
+    type: string
+    format: email
+    example: "techsolutions@pec.it"
+  email:
+    type: string
+    format: email
+    example: "invoices@techsolutions.it"
+  phone:
+    type:
+      - string
+      - "null"
+    example: "+39 02 99887766"
+  address:
+    $ref: ../common/address.yaml
+  paymentTermsDays:
+    type: integer
+    default: 30
+  notes:
+    type:
+      - string
+      - "null"

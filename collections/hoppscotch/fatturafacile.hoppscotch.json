@@ -1,0 +1,1516 @@
+[
+  {
+    "name": "Authentication",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "User authentication",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/auth/login",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "User logout",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/auth/logout",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Refresh access token",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/auth/refresh",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "List API keys",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/auth/api-keys",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create API key",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/auth/api-keys",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Users",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List users",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/users",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create user",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/users",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get user by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/users/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Update user",
+        "method": "PUT",
+        "endpoint": "<<base_url>>/v1/users/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Delete user",
+        "method": "DELETE",
+        "endpoint": "<<base_url>>/v1/users/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "List tenant roles",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/roles",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get current profile",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/profile",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Companies",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List companies",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/companies",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get company by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/companies/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get company settings",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/companies/{id}/settings",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Update company settings",
+        "method": "PUT",
+        "endpoint": "<<base_url>>/v1/companies/{id}/settings",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Customers",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List customers",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/customers",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create customer",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/customers",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get customer by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/customers/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Update customer",
+        "method": "PUT",
+        "endpoint": "<<base_url>>/v1/customers/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Delete customer",
+        "method": "DELETE",
+        "endpoint": "<<base_url>>/v1/customers/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Products",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List products",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/products",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create product",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/products",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get product by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/products/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Update product",
+        "method": "PUT",
+        "endpoint": "<<base_url>>/v1/products/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Delete product",
+        "method": "DELETE",
+        "endpoint": "<<base_url>>/v1/products/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "List stock movements",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/inventory/movements",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Record stock movement",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/inventory/movements",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Services",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List services",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/services",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create service",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/services",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get service by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/services/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Update service",
+        "method": "PUT",
+        "endpoint": "<<base_url>>/v1/services/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Delete service",
+        "method": "DELETE",
+        "endpoint": "<<base_url>>/v1/services/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Quotes",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List quotes",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/quotes",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create quote",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/quotes",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get quote by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/quotes/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Update quote",
+        "method": "PUT",
+        "endpoint": "<<base_url>>/v1/quotes/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Convert quote to invoice",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/quotes/{id}/convert",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Invoices",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List invoices",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/invoices",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create invoice",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/invoices",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get invoice by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/invoices/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Cancel invoice",
+        "method": "DELETE",
+        "endpoint": "<<base_url>>/v1/invoices/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Transmit invoice to SDI",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/invoices/{id}/sdi/transmit",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Download invoice PDF",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/invoices/{id}/pdf",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Credit Notes",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List credit notes",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/credit-notes",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create credit note",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/credit-notes",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get credit note by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/credit-notes/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Payments",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List payments",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/payments",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Record payment",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/payments",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get payment by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/payments/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Refund payment",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/payments/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "List payment methods",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/payment-methods",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Projects",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List projects",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/projects",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create project",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/projects",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get project by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/projects/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Update project",
+        "method": "PUT",
+        "endpoint": "<<base_url>>/v1/projects/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tasks",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List tasks",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/tasks",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Create task",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/tasks",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get task by ID",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/tasks/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Update task",
+        "method": "PUT",
+        "endpoint": "<<base_url>>/v1/tasks/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Files",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "Upload file",
+        "method": "POST",
+        "endpoint": "<<base_url>>/v1/files/upload",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Get file metadata",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/files/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Delete file",
+        "method": "DELETE",
+        "endpoint": "<<base_url>>/v1/files/{id}",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Notifications",
+    "folders": [],
+    "requests": [
+      {
+        "v": "1",
+        "name": "List notifications",
+        "method": "GET",
+        "endpoint": "<<base_url>>/v1/notifications",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      },
+      {
+        "v": "1",
+        "name": "Mark notification as read",
+        "method": "PATCH",
+        "endpoint": "<<base_url>>/v1/notifications/{id}/read",
+        "headers": [
+          {
+            "key": "X-Tenant-ID",
+            "value": "<<tenant_id>>",
+            "active": true
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "active": true
+          }
+        ],
+        "auth": {
+          "authType": "bearer",
+          "token": "<<access_token>>"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,54 @@
+get:
+  tags:
+    - Payments
+  summary: Get payment by ID
+  description: Returns payment transaction details.
+  operationId: getPaymentById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Payment details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/payments/payment.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+post:
+  tags:
+    - Payments
+  summary: Refund payment
+  description: Issues a partial or full refund against a recorded payment.
+  operationId: refundPayment
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/payments/refundRequest.yaml
+  responses:
+    "200":
+      description: Refund processed.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/payments/payment.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

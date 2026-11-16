@@ -1,0 +1,76 @@
+get:
+  tags:
+    - Customers
+  summary: Get customer by ID
+  description: Returns complete customer profile, billing addresses, and contacts.
+  operationId: getCustomerById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Customer profile.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/customers/customer.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+put:
+  tags:
+    - Customers
+  summary: Update customer
+  description: Modifies customer data or billing settings.
+  operationId: updateCustomer
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/customers/customerCreateRequest.yaml
+  responses:
+    "200":
+      description: Customer updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/customers/customer.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml
+
+delete:
+  tags:
+    - Customers
+  summary: Delete customer
+  description: Soft-deletes customer record if no linked legal invoices exist.
+  operationId: deleteCustomer
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "204":
+      description: Customer deleted.
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

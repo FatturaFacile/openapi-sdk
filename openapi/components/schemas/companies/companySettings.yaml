@@ -1,0 +1,36 @@
+type: object
+required:
+  - defaultCurrency
+  - vatRegime
+  - electronicInvoicingEnabled
+properties:
+  defaultCurrency:
+    type: string
+    default: "EUR"
+    example: "EUR"
+  vatRegime:
+    type: string
+    description: Italian fiscal tax regime code (e.g. RF01 for Ordinario, RF19 for Forfettario).
+    example: "RF01"
+  electronicInvoicingEnabled:
+    type: boolean
+    default: true
+    example: true
+  automaticSdiTransmission:
+    type: boolean
+    default: false
+    example: false
+  defaultPaymentTermsDays:
+    type: integer
+    default: 30
+    example: 30
+  bankIban:
+    type:
+      - string
+      - "null"
+    example: "IT60X0542811101000000123456"
+  bankBic:
+    type:
+      - string
+      - "null"
+    example: "BCITITMM"

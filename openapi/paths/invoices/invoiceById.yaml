@@ -1,0 +1,42 @@
+get:
+  tags:
+    - Invoices
+  summary: Get invoice by ID
+  description: Returns complete invoice data including line items, VAT breakdown, and payments.
+  operationId: getInvoiceById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Invoice details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/invoices/invoice.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+delete:
+  tags:
+    - Invoices
+  summary: Cancel invoice
+  description: Cancels draft invoice or initiates credit note workflow if already delivered.
+  operationId: cancelInvoice
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "204":
+      description: Invoice cancelled.
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

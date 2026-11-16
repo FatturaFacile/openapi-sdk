@@ -1,0 +1,25 @@
+type: object
+required:
+  - id
+  - name
+  - code
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "a2000000-0000-0000-0000-000000000001"
+  name:
+    type: string
+    example: "Accountant"
+  code:
+    type: string
+    example: "accountant"
+  description:
+    type:
+      - string
+      - "null"
+    example: "Fiscal management and invoice issuance"
+  permissions:
+    type: array
+    items:
+      $ref: ./permission.yaml

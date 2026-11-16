@@ -1,0 +1,63 @@
+get:
+  tags:
+    - Authentication
+  summary: List API keys
+  description: Returns active API keys for the current tenant.
+  operationId: listApiKeys
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  responses:
+    "200":
+      description: List of tenant API keys.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../components/schemas/auth/apiKey.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml
+
+post:
+  tags:
+    - Authentication
+  summary: Create API key
+  description: Generates a new scoped API key for background integration.
+  operationId: createApiKey
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+            - scopes
+          properties:
+            name:
+              type: string
+            scopes:
+              type: array
+              items:
+                type: string
+  responses:
+    "201":
+      description: API key generated successfully.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/auth/apiKey.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml

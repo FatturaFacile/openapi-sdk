@@ -1,0 +1,22 @@
+type: object
+required:
+  - id
+  - title
+  - dueDate
+  - status
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "d3000000-0000-0000-0000-000000000001"
+  title:
+    type: string
+    example: "Core API Architecture & Schemas"
+  dueDate:
+    type: string
+    format: date
+    example: "2026-03-31"
+  status:
+    type: string
+    enum: [pending, completed]
+    example: "completed"

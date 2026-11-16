@@ -1,0 +1,76 @@
+get:
+  tags:
+    - Products
+  summary: Get product by ID
+  description: Returns complete product details.
+  operationId: getProductById
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Product details.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/products/product.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+put:
+  tags:
+    - Products
+  summary: Update product
+  description: Updates pricing, metadata, or active status.
+  operationId: updateProduct
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/products/productCreateRequest.yaml
+  responses:
+    "200":
+      description: Product updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/products/product.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml
+
+delete:
+  tags:
+    - Products
+  summary: Delete product
+  description: Deactivates or deletes product.
+  operationId: deleteProduct
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "204":
+      description: Product deleted.
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml

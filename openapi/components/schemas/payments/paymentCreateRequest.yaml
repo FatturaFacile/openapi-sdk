@@ -1,0 +1,27 @@
+type: object
+required:
+  - invoiceId
+  - amount
+  - paymentMethodId
+  - paymentDate
+properties:
+  invoiceId:
+    type: string
+    format: uuid
+  amount:
+    $ref: ../common/money.yaml
+  paymentMethodId:
+    type: string
+    format: uuid
+  paymentDate:
+    type: string
+    format: date
+    example: "2026-11-16"
+  transactionReference:
+    type:
+      - string
+      - "null"
+  notes:
+    type:
+      - string
+      - "null"

@@ -1,0 +1,43 @@
+type: object
+required:
+  - accessToken
+  - refreshToken
+  - tokenType
+  - expiresIn
+  - user
+properties:
+  accessToken:
+    type: string
+    description: Signed JWT access token for API requests.
+    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  refreshToken:
+    type: string
+    description: Refresh token used to rotate expired access tokens.
+    example: "d9e8f7a6b5c4..."
+  tokenType:
+    type: string
+    description: Authorization scheme type.
+    example: "Bearer"
+  expiresIn:
+    type: integer
+    description: Token lifetime in seconds.
+    example: 3600
+  user:
+    $ref: ../users/user.yaml
+  tenants:
+    type: array
+    description: List of tenants accessible by the authenticated user.
+    items:
+      type: object
+      required:
+        - id
+        - name
+        - role
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        role:
+          type: string

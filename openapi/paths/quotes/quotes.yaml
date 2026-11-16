@@ -1,0 +1,64 @@
+get:
+  tags:
+    - Quotes
+  summary: List quotes
+  description: Returns quotes with state transitions, customer data, and line totals.
+  operationId: listQuotes
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+    - $ref: ../../components/parameters/paginationLimit.yaml
+    - $ref: ../../components/parameters/paginationPage.yaml
+    - $ref: ../../components/parameters/sorting.yaml
+  responses:
+    "200":
+      description: Paginated quotes.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../components/schemas/quotes/quote.yaml
+              meta:
+                $ref: ../../components/schemas/common/paginationMeta.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+
+post:
+  tags:
+    - Quotes
+  summary: Create quote
+  description: Creates a new commercial proposal or estimate.
+  operationId: createQuote
+  security:
+    - bearerAuth: []
+    - apiKeyAuth: []
+  parameters:
+    - $ref: ../../components/parameters/tenantHeader.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/quotes/quoteCreateRequest.yaml
+  responses:
+    "201":
+      description: Quote created.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/quotes/quote.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml

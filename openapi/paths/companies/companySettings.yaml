@@ -1,0 +1,53 @@
+get:
+  tags:
+    - Companies
+  summary: Get company settings
+  description: Returns fiscal regimes, bank IBAN, and SDI settings.
+  operationId: getCompanySettings
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/idPath.yaml
+  responses:
+    "200":
+      description: Company settings.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/companies/companySettings.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "404":
+      $ref: ../../components/responses/404NotFound.yaml
+
+put:
+  tags:
+    - Companies
+  summary: Update company settings
+  description: Updates fiscal and electronic billing configuration.
+  operationId: updateCompanySettings
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: ../../components/parameters/idPath.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/companies/companySettings.yaml
+  responses:
+    "200":
+      description: Settings updated.
+      content:
+        application/json:
+          schema:
+            $ref: ../../components/schemas/companies/companySettings.yaml
+    "400":
+      $ref: ../../components/responses/400BadRequest.yaml
+    "401":
+      $ref: ../../components/responses/401Unauthorized.yaml
+    "403":
+      $ref: ../../components/responses/403Forbidden.yaml
+    "422":
+      $ref: ../../components/responses/422UnprocessableEntity.yaml
