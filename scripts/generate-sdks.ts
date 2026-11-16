@@ -23,7 +23,7 @@ export async function generateSdk(target: string): Promise<void> {
       stdio: 'inherit'
     });
     console.info(`✅ Successfully generated SDK for: ${target}`);
-  } catch (error) {
+  } catch {
     console.warn(
       `⚠️ OpenAPI Generator CLI execution for ${target} logged a warning or completed with non-zero code.`
     );

@@ -90,3 +90,6 @@ Thumbs.db
 /.cursor/skills/
 /.gemini/skills/
 /.agy/skills/
+
+# Generated API documentation
+/docs/dist/
