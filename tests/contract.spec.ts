@@ -52,8 +52,13 @@ describe('OpenAPI 3.1 Contract Quality Assurance', () => {
 
   it('enforces RFC 9457 Problem Details error responses on operations', () => {
     const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
-    for (const [routePath, methods] of Object.entries(spec.paths)) {
-      for (const [method, op] of Object.entries(methods as Record<string, any>)) {
+    for (const methods of Object.values(spec.paths)) {
+      for (const op of Object.values(
+        methods as Record<
+          string,
+          { responses?: Record<string, { content?: Record<string, unknown> }> }
+        >
+      )) {
         if (typeof op !== 'object' || !op.responses) continue;
         const err401 = op.responses['401'];
         if (err401 && err401.content) {

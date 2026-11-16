@@ -1,5 +1,7 @@
-name: Deploy to Pages & Release Assets
+name: Release Assets
 
+# On a published release: run the full CI, then attach the bundled OpenAPI specification
+# and the generated API documentation (with SHA-256 checksums) to the release.
 on:
   release:
     types:
@@ -9,34 +11,24 @@ on:
 permissions: {}
 
 concurrency:
-  group: pages
+  group: release
   cancel-in-progress: false
 
 jobs:
-  # Run the full CI pipeline first; nothing is published unless it passes
   ci:
     uses: ./.github/workflows/ci.yml
     permissions:
       contents: read
-      checks: write
-      pull-requests: write
-      security-events: write
-    secrets: inherit
 
-  build:
+  build-and-release:
     needs: ci
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
-      pages: write
-      id-token: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
 
       - name: Setup PNPM
         uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
@@ -52,105 +44,22 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Angular application
-        run: pnpm run build --configuration production,demo
-
-      - name: Configure SPA routing for GitHub Pages
+      - name: Bundle specification and build documentation
         run: |
-          DIST_DIR=$(find dist -type f -name "index.html" -exec dirname {} \; | head -n 1)
+          pnpm run bundle:openapi
+          pnpm run docs:build
 
-          echo "Output directory: $DIST_DIR"
-          echo "DIST_DIR=$DIST_DIR" >> "$GITHUB_ENV"
-
-          cp "$DIST_DIR/index.html" "$DIST_DIR/404.html"
-
-      - name: Create release archives and generate checksums
-        if: github.event_name == 'release'
+      - name: Prepare release assets
         run: |
-          TAG="${{ github.event.release.tag_name }}"
-          ARCHIVE_NAME="angular-build-$TAG"
-
-          # Crea il tar.gz
-          tar -czf "${ARCHIVE_NAME}.tar.gz" -C "$DIST_DIR" .
-
-          # Usa Python per creare lo zip in modo sicuro e multipiattaforma senza dipendenze esterne
-          python3 -c "
-          import shutil
-          shutil.make_archive('${ARCHIVE_NAME}', 'zip', '${DIST_DIR}')
-          "
-
-                  SHA_TAR=$(sha256sum "${ARCHIVE_NAME}.tar.gz" | awk '{print $1}')
-          SHA_ZIP=$(sha256sum "${ARCHIVE_NAME}.zip" | awk '{print $1}')
-
-          echo "$SHA_TAR  ${ARCHIVE_NAME}.tar.gz" > SHA256SUMS
-          echo "$SHA_ZIP  ${ARCHIVE_NAME}.zip" >> SHA256SUMS
-
-          echo "ARCHIVE_TAR=${ARCHIVE_NAME}.tar.gz" >> "$GITHUB_ENV"
-          echo "ARCHIVE_ZIP=${ARCHIVE_NAME}.zip" >> "$GITHUB_ENV"
-          echo "CHECKSUM_FILE=SHA256SUMS" >> "$GITHUB_ENV"
-          echo "SHA_TAR=${SHA_TAR}" >> "$GITHUB_ENV"
-          echo "SHA_ZIP=${SHA_ZIP}" >> "$GITHUB_ENV"
+          mkdir -p release-assets
+          cp openapi/bundled/openapi.yaml release-assets/openapi.yaml
+          cp docs/dist/index.html release-assets/api-docs.html
+          (cd release-assets && sha256sum openapi.yaml api-docs.html > SHA256SUMS)
 
       - name: Upload release assets
         if: github.event_name == 'release'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
         run: |
-          gh release upload "${{ github.event.release.tag_name }}" \
-            "${{ env.ARCHIVE_TAR }}" \
-            "${{ env.ARCHIVE_ZIP }}" \
-            "${{ env.CHECKSUM_FILE }}" \
-            --clobber
-
-      - name: Generate categorized release notes
-        if: github.event_name == 'release'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG="${{ github.event.release.tag_name }}"
-
-          EXISTING_BODY=$(gh release view "$TAG" --json body --jq '.body // ""')
-
-          GENERATED_NOTES=$(gh api \
-            -X POST \
-            "repos/${{ github.repository }}/releases/generate-notes" \
-            -f tag_name="$TAG" \
-            --jq '.body' || echo "")
-
-          cat <<EOF > release_notes.md
-          ${EXISTING_BODY}
-
-          ${GENERATED_NOTES}
-
-          ## Integrity Verification (SHA-256)
-
-          | File | SHA-256 Checksum |
-          | :--- | :--- |
-          | \`${{ env.ARCHIVE_TAR }}\` | \`${{ env.SHA_TAR }}\` |
-          | \`${{ env.ARCHIVE_ZIP }}\` | \`${{ env.SHA_ZIP }}\` |
-          EOF
-
-          gh release edit "$TAG" --notes-file release_notes.md
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: ${{ env.DIST_DIR }}
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+          gh release upload "$TAG" release-assets/* --clobber

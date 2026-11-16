@@ -5,19 +5,26 @@ on:
     tags:
       - "v*"
 
+permissions:
+  contents: read
+
+# Publishing runs only when the repository variable PUBLISH_ENABLED is 'true'
+# (set it once NPM_TOKEN, PYPI_API_TOKEN and NUGET_API_KEY secrets exist); otherwise the jobs are skipped.
+
 jobs:
   publish-npm:
+    if: ${{ vars.PUBLISH_ENABLED == 'true' }}
     name: Publish TypeScript SDK to npm
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
         with:
-          version: 9.15.0
+          run_install: false
       - run: pnpm install --frozen-lockfile
       - run: pnpm run bundle:openapi
       - run: pnpm run generate:all
@@ -28,11 +35,12 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-pypi:
+    if: ${{ vars.PUBLISH_ENABLED == 'true' }}
     name: Publish Python SDK to PyPI
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.11"
       - name: Build wheel and sdist
@@ -46,11 +54,12 @@ jobs:
         run: cd sdk/python && twine upload dist/*
 
   publish-nuget:
+    if: ${{ vars.PUBLISH_ENABLED == 'true' }}
     name: Publish .NET SDK to NuGet
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
           dotnet-version: "8.0.x"
       - name: Build and Pack NuGet Package
