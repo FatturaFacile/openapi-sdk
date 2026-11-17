@@ -1,0 +1,12 @@
+# Windsurf Rules: fatturafacile-openapi-sdk
+
+Refer to canonical rules in: AGENTS.md
+
+- **Contract-First**: Canonical API specifications are in `openapi/`. Never edit generated code under `sdk/` or `collections/`.
+- **Package Manager**: Use `pnpm` exclusively (`pnpm@9.15.0`). Never use `npm` or `yarn`.
+- **Core Commands**:
+  - `pnpm run lint:openapi`: Lint OpenAPI specifications
+  - `pnpm test`: Execute Vitest test suite
+  - `pnpm run lint`: ESLint check
+  - `pnpm run format:check`: Prettier check
+  - `pnpm run generate:all`: Run all generator pipelines

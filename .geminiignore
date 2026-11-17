@@ -1,0 +1,80 @@
+# Ignore list shared by every AI tool in this repository (.gitignore syntax).
+# Excludes dependencies, build outputs, caches, secrets, and binary token sinks.
+
+# Dependencies and package managers
+node_modules/
+.pnpm-store/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+composer.lock
+Cargo.lock
+
+# Build outputs and temporary caches
+dist/
+build/
+coverage/
+test-results/
+playwright-report/
+.sandbox/
+.cache/
+.tmp/
+tmp/
+out-tsc/
+
+# Multi-Language SDK compiled outputs & language build caches
+sdk/**/dist/
+sdk/**/build/
+sdk/**/bin/
+sdk/**/obj/
+sdk/**/target/
+sdk/**/vendor/
+sdk/**/__pycache__/
+sdk/**/.venv/
+sdk/**/node_modules/
+
+# Bundled & compiled OpenAPI artifacts and docs
+openapi/bundled/**
+docs/api-bundle.*
+docs/bundled/**
+docs/dist/
+
+# Secrets, certificates, and local environment files (NEVER READ)
+.env
+.env.*
+!.env.example
+auth.json
+certs/
+*.pem
+*.key
+*.pfx
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.log
+logs/
+
+# IDE and OS metadata
+.git/
+.idea/
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/mcp.json
+.DS_Store
+Thumbs.db
+
+# Minified and binary token sinks
+*.min.js
+*.min.css
+*.map
+*.css.map
+*.pdf
+*.zip
+*.tar.gz
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.ico
