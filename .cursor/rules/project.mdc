@@ -1,17 +1,8 @@
 ---
-description: Project rules and architectural guidelines for Cursor
+description: Canonical project governance pointer for Cursor
 globs: **/*
 alwaysApply: true
 ---
 
-Refer to canonical repository rules in `AGENTS.md`.
-
-## Key Invariants
-- **Single Source of Truth**: `openapi/` defines all contracts. Never manually edit generated code in `sdk/` or `collections/`.
-- **Package Manager**: Use `pnpm` exclusively (`pnpm@9.15.0`).
-- **Commands**:
-  - `pnpm run lint:openapi`: Lint specifications
-  - `pnpm test`: Run test suite
-  - `pnpm run lint`: ESLint check
-  - `pnpm run format:check`: Prettier check
-  - `pnpm run generate:all`: Regenerate schemas, collections, MCP tools, and SDKs
+- Canonical governance SSOT: [AGENTS.md](../../AGENTS.md).
+- Cursor-specific: use `pnpm` exclusively; never edit generated files in `sdk/` or `collections/`.

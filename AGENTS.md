@@ -1,83 +1,39 @@
-# Agent Guidelines: Fattura Facile OpenAPI & Multi-Language SDK
+# AGENTS.md — Fattura Facile OpenAPI & Multi-Language SDK
 
-You are an expert API Platform Architect and SDK Engineer specializing in OpenAPI 3.1.x, code generation, schema validation, and multi-language client architecture. You write clean, modular, strictly-typed specifications and robust generator tooling.
+## Stack & Repository Layout
 
-## Project & Stack Overview
+- **Repo**: `@fatturafacile/openapi-sdk` — OpenAPI 3.1.0 Single Source of Truth (SSOT) for Fattura Facile ERP API contracts and multi-language SDKs.
+- **Runtime & Tooling**: Node.js >= 20 LTS, TypeScript 5.7+ (`strict: true`), `pnpm@9.15.0` exclusively (NEVER `npm` or `yarn`), Redocly CLI, Vitest 2.1+, ESLint 9, Prettier 3.4+.
+- **Canonical Sources**: `openapi/` (`openapi.yaml`, `paths/`, `components/{schemas,parameters,responses,securitySchemes}`), `generators/` (`zod`, `json-schema`, `mcp`, `collections`), `templates/` (Mustache), `scripts/`, `tests/`.
+- **Generated Targets (READ-ONLY)**: `sdk/` (`typescript`, `javascript`, `php`, `csharp`, `java`, `python`, `go`), `collections/` (`postman`, `bruno`, `insomnia`, `hoppscotch`), `mcp/`, `generators/zod/generated/`, `openapi/bundled/`.
 
-- **Repository**: `fatturafacile-openapi-sdk` (Single Source of Truth for Fattura Facile ERP API contracts and official client SDKs).
-- **Core Runtime & Tooling**: Node.js >= 20.0.0 (LTS), TypeScript 5.7+ (strict mode), pnpm 9.15.0 (`packageManager: pnpm@9.15.0`), Redocly CLI (`@redocly/cli`), Vitest 2.1+, ESLint 9 (flat config), Prettier 3.4+.
-- **Deliverables**:
-  - OpenAPI 3.1.x specifications (`openapi/`)
-  - Runtime validation schemas: Zod (`generators/zod/`), JSON Schema (`generators/json-schema/`)
-  - API Client Collections: Postman, Bruno, Insomnia, Hoppscotch (`collections/`)
-  - Model Context Protocol (MCP) tool metadata (`mcp/`)
-  - Multi-Language Client SDKs: TypeScript, JavaScript, PHP, C# (.NET), Java, Python, Go (`sdk/`)
+## Architecture & Contract-First Invariants
 
-## Folder Layout
+- **OpenAPI-First**: Define all endpoints, DTOs, parameters, responses, errors, and security schemes exclusively in `openapi/`.
+- **Never Hand-Edit Generated Code**: NEVER edit files in `sdk/*`, `collections/*`, `mcp/*`, `generators/zod/generated/*`, or `openapi/bundled/*`; modify `openapi/`, `generators/`, `templates/`, or `scripts/` and regenerate.
+- **DRY Modular Composition**: Zero schema duplication; compose models via `$ref`, `allOf`, `oneOf` from `openapi/components/` partitioned across all 14 ERP domains.
+- **Multi-Tenancy & Auth**: Enforce `X-Tenant-ID` UUID header (or verified JWT tenant claim) on all domain endpoints; use `bearerAuth`, `oauth2`, and `apiKeyAuth`.
+- **Errors & Versioning**: All errors strictly follow RFC 9457 (`application/problem+json`); follow SemVer 2.0.0; every `openapi/` change must pass `pnpm run test:breaking` (OASDiff).
+- **Secrets Hygiene**: Never read, log, commit, or leak `.env*`, `auth.json`, `certs/`, or private keys.
 
-```
-├── openapi/              # Canonical OpenAPI 3.1.x specifications
-│   ├── openapi.yaml      # Root entrypoint
-│   ├── paths/            # Modular endpoint paths grouped by domain
-│   └── components/       # Schemas, parameters, responses, headers, securitySchemes
-├── generators/           # Schema & SDK generation scripts (zod, json-schema, mcp, collections)
-├── templates/            # Generator templates (Mustache)
-├── scripts/              # Bundling, breaking-change detection, and SDK build scripts
-├── sdk/                  # Generated multi-language SDKs (NEVER hand-edit generated code)
-│   ├── csharp/           # .NET C# SDK
-│   ├── go/               # Go SDK
-│   ├── java/             # Java SDK
-│   ├── javascript/       # JavaScript SDK
-│   ├── php/              # PHP SDK
-│   ├── python/           # Python SDK
-│   └── typescript/       # TypeScript SDK
-├── collections/          # Generated API collections (Postman, Bruno, Insomnia, Hoppscotch)
-├── mcp/                  # Generated Model Context Protocol tool metadata
-└── tests/                # Vitest test suite (contract, schema validation, collections, MCP)
-```
+## Coding, Typing & Localization Standards
 
-## Mandatory Architectural Invariants
+- **Strict TypeScript**: `"strict": true`, `noImplicitAny`, `noUncheckedIndexedAccess`, zero warnings, never `any`; narrow `unknown` via Zod schemas or type guards.
+- **Schema Parity**: Keep Zod, JSON Schema, MCP metadata, and API collections in 1:1 parity with OpenAPI 3.1 definitions.
+- **Formatting**: Prettier (`endOfLine: "lf"`, `singleQuote: true`, `printWidth: 100`, `trailingComma: "none"`).
+- **Language & Locales**: Write code, identifiers, comments, docs, and commit messages in English (keep official Italian fiscal identifiers: SDI, FatturaPA, Codice Fiscale, Partita IVA, PEC); preserve all 4 Fattura Facile locales (`it`, `de`, `fr`, `en`) across any localized schemas, enums, error metadata, or cross-repo contracts.
 
-1. **Contract-First (OpenAPI-First)**:
-   - Canonical definitions of all endpoints, DTOs, parameters, responses, error models, and security schemes reside in `openapi/`.
-   - **NEVER** hand-edit generated code in `sdk/*` or generated collections in `collections/*`.
-   - Always modify `openapi/` or generator templates/scripts in `templates/`, `generators/`, `scripts/`.
+## Strict Git Workflow (`dev` Only, Zero PRs, Zero Leftovers)
 
-2. **DRY & Modular Composition**:
-   - Reusable components reside under `openapi/components/` (`schemas/`, `parameters/`, `responses/`, `securitySchemes/`).
-   - Zero schema duplication: compose models using `$ref`, `allOf`, and `oneOf`. Avoid monolithic specification files.
+- **Direct `dev` Integration**: Integrate all work directly into `dev` via local merge: `git checkout dev && git pull --rebase origin dev && git merge --no-ff <branch>`.
+- **FORBIDDEN**: NEVER commit, merge, or push to `main`. NEVER create Pull Requests (`gh pr create` / `gh pr`).
+- **Autonomous Conflict Resolution**: Resolve all merge conflicts autonomously while preserving Clean Architecture, Contract-First invariants, strict types, and all 4 locales (`it`, `de`, `fr`, `en`).
+- **Mandatory End-of-Task Cleanup**: After pushing `dev`, ALWAYS delete merged local/remote feature branches (`git branch -D <branch>`, `git push origin --delete <branch>`), remove linked worktrees (`git worktree remove --force <path> && git worktree prune`), and delete any temporary/debug files created during the session so `git status` is completely clean.
 
-3. **Multi-Tenancy & Security Standards**:
-   - Every domain contract enforces tenant context via `X-Tenant-ID` header.
-   - Standard security schemes: Bearer JWT (`bearerAuth`), OAuth2 (`oauth2`), and API Key (`apiKeyAuth`).
-   - Error responses strictly adhere to RFC 9457 (`application/problem+json`).
+## Quality Gates & Commands
 
-4. **Strict Typing & Quality Standards**:
-   - Strict TypeScript checking (`"strict": true`, zero warnings, no implicit `any`).
-   - Use `unknown` for uncertain payloads and narrow via Zod schemas or type guards.
-   - Runtime validation schemas (Zod / JSON Schema) must maintain 1:1 parity with OpenAPI 3.1 definitions.
-   - Code, schemas, comments, documentation, and commit messages must be in English. Domain fiscal terms (e.g., SDI, Codice Fiscale, Partita IVA) are kept as official identifiers.
-
-5. **Versioning & Compatibility**:
-   - Follow Semantic Versioning (SemVer 2.0.0).
-   - Any modification to `openapi/` must pass automated breaking change checks (`pnpm run test:breaking` via `oasdiff`).
-
-## Exact Verification & Quality Gate Commands
-
-Package manager: **pnpm** exclusively. Never use `npm` or `yarn`.
-
-| Gate | Command | Description |
-|---|---|---|
-| **OpenAPI Lint** | `pnpm run lint:openapi` | Validates OpenAPI 3.1 specs with Redocly CLI (must pass with 0 errors) |
-| **OpenAPI Bundle** | `pnpm run bundle:openapi` | Bundles multi-file OpenAPI specs into `openapi/bundled/` |
-| **Breaking Changes** | `pnpm run test:breaking` | Runs OASDiff check against baseline specification |
-| **Run Tests** | `pnpm test` | Executes Vitest contract, schema, and collections test suite |
-| **Test Coverage** | `pnpm run test:coverage` | Runs Vitest with coverage report |
-| **Code Lint** | `pnpm run lint` | Runs ESLint across scripts, generators, and tests |
-| **Lint Fix** | `pnpm run lint:fix` | Automatically fixes ESLint rule violations |
-| **Format Check** | `pnpm run format:check` | Checks code formatting with Prettier |
-| **Format Fix** | `pnpm run format` | Applies Prettier formatting |
-| **TypeScript Build**| `pnpm run build` | Runs TypeScript project build (`tsc --build tsconfig.json`) |
-| **Generate All** | `pnpm run generate:all` | Runs generators for Zod, JSON Schema, MCP, collections, and SDKs |
-| **Generate SDKs** | `pnpm run generate:sdks` | Generates multi-language client SDKs |
-| **Docs Preview** | `pnpm run docs` | Starts local Redocly documentation preview on port 8080 |
+- **Pre-Push Gate (Required, 0 Warnings/Errors)**: `pnpm run lint:openapi && pnpm run bundle:openapi && pnpm run lint && pnpm run format:check && pnpm run build && pnpm test`.
+- **Never Push Unverified**: NEVER push to `origin dev` unless all quality gates pass with zero warnings/errors.
+- **OpenAPI Spec Changes**: Also run `pnpm run test:breaking` and regenerate outputs via `pnpm run generate:all` (or targeted `pnpm run generate:zod`, `pnpm run generate:json-schema`, `pnpm run generate:mcp`, `pnpm run generate:collections`, `pnpm run generate:sdks`).
+- **Helpers**: `pnpm run lint:fix`, `pnpm run format`, `pnpm run test:coverage`, `pnpm run docs`, `pnpm run docs:build`.
+- **Windows PowerShell Note**: Use `pnpm.cmd` if `pnpm.ps1` execution is blocked by policy.
