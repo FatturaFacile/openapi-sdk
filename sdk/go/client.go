@@ -30,7 +30,7 @@ type Client struct {
 func NewClient(opts ClientOptions) *Client {
 	baseURL := opts.BaseURL
 	if baseURL == "" {
-		baseURL = "https://api.fatturafacile.com"
+		baseURL = "https://api.fatturafacile.eu"
 	}
 	baseURL = strings.TrimRight(baseURL, "/")
 

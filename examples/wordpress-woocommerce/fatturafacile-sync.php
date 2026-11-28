@@ -43,7 +43,7 @@ function fatturafacile_sync_completed_order($order_id) {
         ];
     }
 
-    $response = wp_remote_post('https://api.fatturafacile.com/v1/invoices', [
+    $response = wp_remote_post('https://api.fatturafacile.eu/v1/invoices', [
         'headers' => [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',

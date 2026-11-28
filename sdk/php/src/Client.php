@@ -21,7 +21,7 @@ class Client
     private ?StreamFactoryInterface $streamFactory;
 
     public function __construct(
-        string $baseUrl = 'https://api.fatturafacile.com',
+        string $baseUrl = 'https://api.fatturafacile.eu',
         ?string $accessToken = null,
         ?string $apiKey = null,
         ?string $tenantId = null,

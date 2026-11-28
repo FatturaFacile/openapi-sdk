@@ -99,7 +99,7 @@ export function generatePostmanCollection(spec: OpenApiSpec): Record<string, unk
       bearer: [{ key: 'token', value: '{{access_token}}', type: 'string' }]
     },
     variable: [
-      { key: 'base_url', value: 'https://api.fatturafacile.com', type: 'string' },
+      { key: 'base_url', value: 'https://api.fatturafacile.eu', type: 'string' },
       { key: 'tenant_id', value: 'a0000000-0000-0000-0000-000000000001', type: 'string' },
       { key: 'access_token', value: 'YOUR_JWT_ACCESS_TOKEN', type: 'string' }
     ],

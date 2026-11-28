@@ -35,7 +35,7 @@ export class FatturaFacileClient {
   private readonly timeoutMs: number;
 
   constructor(options: FatturaFacileClientOptions = {}) {
-    this.baseUrl = (options.baseUrl || 'https://api.fatturafacile.com').replace(/\/$/, '');
+    this.baseUrl = (options.baseUrl || 'https://api.fatturafacile.eu').replace(/\/$/, '');
     this.accessToken = options.accessToken;
     this.apiKey = options.apiKey;
     this.tenantId = options.tenantId;
@@ -106,7 +106,7 @@ export class FatturaFacileClient {
             problem = (await response.json()) as ProblemDetails;
           } catch {
             problem = {
-              type: 'https://api.fatturafacile.com/errors/generic',
+              type: 'https://api.fatturafacile.eu/errors/generic',
               title: response.statusText || 'HTTP Error',
               status: response.status,
               detail: `Request failed with status ${response.status}`

@@ -14,7 +14,7 @@ composer require fatturafacile/sdk-php
 use FatturaFacile\Sdk\Client;
 
 $client = new Client(
-    baseUrl: 'https://api.fatturafacile.com',
+    baseUrl: 'https://api.fatturafacile.eu',
     apiKey: getenv('FATTURAFACILE_API_KEY'),
     tenantId: 'a0000000-0000-0000-0000-000000000001'
 );

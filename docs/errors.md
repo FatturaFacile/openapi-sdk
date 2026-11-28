@@ -8,11 +8,11 @@ All error responses returned by Fattura Facile ERP adhere strictly to the **IETF
 
 ```json
 {
-  "type": "https://api.fatturafacile.com/v1/errors/unprocessable-entity",
+  "type": "https://api.fatturafacile.eu/v1/errors/unprocessable-entity",
   "title": "Validation Error",
   "status": 422,
   "detail": "The provided fiscalCode is invalid for Italian SDI transmission.",
-  "instance": "https://api.fatturafacile.com/v1/invoices/f1000000-0000-0000-0000-000000000001",
+  "instance": "https://api.fatturafacile.eu/v1/invoices/f1000000-0000-0000-0000-000000000001",
   "invalidParams": [
     {
       "name": "fiscalCode",

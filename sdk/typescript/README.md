@@ -16,7 +16,7 @@ npm install @fatturafacile/sdk
 import { FatturaFacileClient } from '@fatturafacile/sdk';
 
 const client = new FatturaFacileClient({
-  baseUrl: 'https://api.fatturafacile.com',
+  baseUrl: 'https://api.fatturafacile.eu',
   apiKey: process.env.FATTURAFACILE_API_KEY,
   tenantId: 'a0000000-0000-0000-0000-000000000001'
 });

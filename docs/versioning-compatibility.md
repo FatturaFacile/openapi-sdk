@@ -9,7 +9,7 @@ Fattura Facile ERP contracts and multi-language SDKs strictly adhere to **Semant
 All public API endpoints are prefixed with the major contract version:
 
 ```
-https://api.fatturafacile.com/v1/...
+https://api.fatturafacile.eu/v1/...
 ```
 
 A major version bump (`/v2/`) is only introduced when backward-incompatible modifications cannot be avoided.

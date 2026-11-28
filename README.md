@@ -177,7 +177,7 @@ var invoices = await client.SendAsync<object>(HttpMethod.Get, "/v1/invoices");
 
 ```java
 FatturaFacileClient client = new FatturaFacileClient(
-    "https://api.fatturafacile.com",
+    "https://api.fatturafacile.eu",
     null,
     "ff_live_your_key",
     "a0000000-0000-0000-0000-000000000001"
