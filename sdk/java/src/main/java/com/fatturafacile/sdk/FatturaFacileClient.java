@@ -17,7 +17,7 @@ public class FatturaFacileClient {
     private final ObjectMapper objectMapper;
 
     public FatturaFacileClient(String baseUrl, String accessToken, String apiKey, String tenantId) {
-        this.baseUrl = (baseUrl != null ? baseUrl : "https://api.fatturafacile.com").replaceAll("/$", "");
+        this.baseUrl = (baseUrl != null ? baseUrl : "https://api.fatturafacile.eu").replaceAll("/$", "");
         this.accessToken = accessToken;
         this.apiKey = apiKey;
         this.tenantId = tenantId;

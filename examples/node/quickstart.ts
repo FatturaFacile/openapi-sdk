@@ -2,7 +2,7 @@ import { FatturaFacileClient } from '../../sdk/typescript/src/client.js';
 
 async function run() {
   const client = new FatturaFacileClient({
-    baseUrl: 'https://api.fatturafacile.com',
+    baseUrl: 'https://api.fatturafacile.eu',
     apiKey: process.env.FATTURAFACILE_API_KEY || 'ff_live_sample',
     tenantId: 'a0000000-0000-0000-0000-000000000001'
   });

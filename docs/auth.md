@@ -14,7 +14,7 @@ Send credentials to `/v1/auth/login`:
 
 ```http
 POST /v1/auth/login HTTP/1.1
-Host: api.fatturafacile.com
+Host: api.fatturafacile.eu
 Content-Type: application/json
 
 {

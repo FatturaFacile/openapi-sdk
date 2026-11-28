@@ -10,7 +10,7 @@ All authenticated API requests targeting tenant resources (invoices, customers, 
 
 ```http
 GET /v1/invoices HTTP/1.1
-Host: api.fatturafacile.com
+Host: api.fatturafacile.eu
 Authorization: Bearer <accessToken>
 X-Tenant-ID: a0000000-0000-0000-0000-000000000001
 ```

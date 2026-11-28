@@ -42,7 +42,7 @@ const client = new FatturaFacileClient({
 const invoices = await client.request('GET', '/v1/invoices?limit=25');
 ```
 
-Note: the SDK default for `baseUrl` is `https://api.fatturafacile.com`; pass `baseUrl` explicitly. Usage in the other languages is in [docs/sdk-usage.md](docs/sdk-usage.md).
+Note: the SDK default for `baseUrl` is `https://api.fatturafacile.eu`; pass `baseUrl` explicitly. Usage in the other languages is in [docs/sdk-usage.md](docs/sdk-usage.md).
 
 ## Requirements
 

@@ -44,7 +44,7 @@ describe('Generated Zod Schemas Validation', () => {
 
   it('validates RFC 9457 ProblemDetails schema', () => {
     const validProblem = {
-      type: 'https://api.fatturafacile.com/v1/errors/not-found',
+      type: 'https://api.fatturafacile.eu/v1/errors/not-found',
       title: 'Resource Not Found',
       status: 404,
       detail: 'Invoice inv_123 does not exist.'

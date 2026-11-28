@@ -11,7 +11,7 @@ class FatturaFacileServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Client::class, function ($app) {
             return new Client(
-                baseUrl: config('services.fatturafacile.base_url', 'https://api.fatturafacile.com'),
+                baseUrl: config('services.fatturafacile.base_url', 'https://api.fatturafacile.eu'),
                 apiKey: config('services.fatturafacile.api_key'),
                 tenantId: config('services.fatturafacile.tenant_id')
             );

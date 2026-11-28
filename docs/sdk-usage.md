@@ -18,7 +18,7 @@ Usage:
 import { FatturaFacileClient } from '@fatturafacile/sdk';
 
 const client = new FatturaFacileClient({
-  baseUrl: 'https://api.fatturafacile.com',
+  baseUrl: 'https://api.fatturafacile.eu',
   apiKey: 'ff_live_998877665544332211',
   tenantId: 'a0000000-0000-0000-0000-000000000001'
 });
@@ -44,7 +44,7 @@ Usage:
 use FatturaFacile\Sdk\Client;
 
 $client = new Client(
-    baseUrl: 'https://api.fatturafacile.com',
+    baseUrl: 'https://api.fatturafacile.eu',
     apiKey: 'ff_live_998877665544332211',
     tenantId: 'a0000000-0000-0000-0000-000000000001'
 );
@@ -158,7 +158,7 @@ import com.fatturafacile.sdk.FatturaFacileClient;
 import java.util.Map;
 
 FatturaFacileClient client = new FatturaFacileClient(
-    "https://api.fatturafacile.com",
+    "https://api.fatturafacile.eu",
     null,
     "ff_live_998877665544332211",
     "a0000000-0000-0000-0000-000000000001"

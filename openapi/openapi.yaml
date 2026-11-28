@@ -15,11 +15,11 @@ info:
     url: https://opensource.org/licenses/MIT
 
 servers:
-  - url: https://api.fatturafacile.com
+  - url: https://api.fatturafacile.eu
     description: Production Cloud API Gateway
   - url: https://sandbox-api.fatturafacile.com
     description: Sandbox & SDI Simulation Testing Environment
-  - url: https://dev-api.fatturafacile.com
+  - url: https://dev-api.fatturafacile.eu
     description: Development Environment
 
 tags:

@@ -1,6 +1,6 @@
 export class FatturaFacileClient {
   constructor(options = {}) {
-    this.baseUrl = (options.baseUrl || 'https://api.fatturafacile.com').replace(/\/$/, '');
+    this.baseUrl = (options.baseUrl || 'https://api.fatturafacile.eu').replace(/\/$/, '');
     this.accessToken = options.accessToken;
     this.apiKey = options.apiKey;
     this.tenantId = options.tenantId;

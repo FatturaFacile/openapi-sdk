@@ -13,7 +13,7 @@ class FatturaFacileError(Exception):
 class FatturaFacileClient:
     def __init__(
         self,
-        base_url: str = "https://api.fatturafacile.com",
+        base_url: str = "https://api.fatturafacile.eu",
         access_token: Optional[str] = None,
         api_key: Optional[str] = None,
         tenant_id: Optional[str] = None,
@@ -73,7 +73,7 @@ class FatturaFacileClient:
 class AsyncFatturaFacileClient:
     def __init__(
         self,
-        base_url: str = "https://api.fatturafacile.com",
+        base_url: str = "https://api.fatturafacile.eu",
         access_token: Optional[str] = None,
         api_key: Optional[str] = None,
         tenant_id: Optional[str] = None,

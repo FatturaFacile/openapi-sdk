@@ -9,7 +9,7 @@ namespace FatturaFacile.Sdk
 {
     public class FatturaFacileClientOptions
     {
-        public string BaseUrl { get; set; } = "https://api.fatturafacile.com";
+        public string BaseUrl { get; set; } = "https://api.fatturafacile.eu";
         public string? AccessToken { get; set; }
         public string? ApiKey { get; set; }
         public string? TenantId { get; set; }
