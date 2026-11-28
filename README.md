@@ -214,7 +214,7 @@ This allows AI assistants (Claude Desktop, Cursor, Copilot, Windsurf) to inspect
 
 ### Prerequisites
 
-- Node.js >= 20.0.0 (LTS)
+- Node.js >= 24.0.0 (LTS)
 - `pnpm` >= 9.0.0
 
 ```bash
