@@ -1,317 +1,129 @@
-# Fattura Facile OpenAPI 3.1 & Multi-Language SDK
+# FatturaFacile OpenAPI and SDKs
 
-[![CI - Quality Assurance](https://github.com/fatturafacile/fatturafacile-openapi-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/fatturafacile/fatturafacile-openapi-sdk/actions/workflows/ci.yml)
+[![CI](https://github.com/FatturaFacile/openapi-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/FatturaFacile/openapi-sdk/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![OpenAPI 3.1](https://img.shields.io/badge/OpenAPI-3.1.0-brightgreen.svg)](https://spec.openapis.org/oas/v3.1.0)
-[![Redocly Validated](https://img.shields.io/badge/Redocly-Validated-success.svg)](https://redocly.com)
+[![Redocly](https://img.shields.io/badge/Redocly-linted-success.svg)](https://redocly.com)
 [![Vitest](https://img.shields.io/badge/Tested%20with-Vitest-yellow.svg)](https://vitest.dev)
-[![MCP Ready](https://img.shields.io/badge/Model%20Context%20Protocol-MCP%20Ready-purple.svg)](https://modelcontextprotocol.io)
 
-**Fattura Facile OpenAPI & Multi-Language SDK** is the official **Single Source of Truth (SSOT)** for all API contracts, Data Transfer Objects (DTOs), payload schemas, runtime validation rules (Zod & JSON Schema), Model Context Protocol (MCP) tool metadata, developer API collections (Postman, Insomnia, Bruno, Hoppscotch), and official client libraries for the Fattura Facile ERP ecosystem.
+OpenAPI 3.1 contract for the [FatturaFacile](https://github.com/FatturaFacile/FatturaFacile) ERP API, with everything generated from it: runtime schemas (Zod and JSON Schema), API collections (Postman, Insomnia, Bruno, Hoppscotch), MCP tool metadata and client SDKs in seven languages.
 
----
+> **Status: early stage (version 1.0.0 of the specification).** The specification covers a subset of the API (14 domains); the SDKs are thin request clients, not full typed wrappers of every endpoint. The [`web-api`](https://github.com/FatturaFacile/web-api) repository also keeps its own OpenAPI file; check there for the complete, current API surface.
 
-## 📑 Table of Contents
+## Overview
 
-- [Architectural Principles & Invariants](#-architectural-principles--invariants)
-- [Repository Organization](#-repository-organization)
-- [Domain Coverage (14 ERP Domains)](#-domain-coverage-14-erp-domains)
-- [Multi-Language Client SDKs (7 Languages)](#-multi-language-client-sdks-7-languages)
-- [Model Context Protocol (MCP) Integration](#-model-context-protocol-mcp-integration)
-- [Developer API Collections](#-developer-api-collections)
-- [Validation & Schema Generators](#-validation--schema-generators)
-- [Development & Automation Workflow](#-development--automation-workflow)
-- [Docker & Containerized Execution](#-docker--containerized-execution)
-- [CI/CD & Multi-Registry Publishing](#-cicd--multi-registry-publishing)
-- [Documentation Index](#-documentation-index)
-- [Contributing & Governance](#-contributing--governance)
-- [License](#-license)
+- **Contract first:** the specification in `openapi/` is the source. Generated output (`sdk/`, `collections/`, `dist/`, `mcp/`) is never edited by hand: change the specification, the generators in `generators/` or the templates in `templates/`, then regenerate.
+- **Tenant context:** business endpoints take the tenant through the `X-Tenant-ID` header or a JWT claim.
+- **Errors:** RFC 9457 problem details (`application/problem+json`).
+- **Breaking-change gate:** `oasdiff` runs in CI against the base branch.
+- **Domains (14):** authentication, users and roles, companies, customers, products, services, quotes, invoices, credit notes, payments, projects, tasks, files, notifications (one folder each under `openapi/paths/`).
 
----
+### Generated artifacts
 
-## 🏛 Architectural Principles & Invariants
+| Output                         | Location                                                | Committed           |
+| :----------------------------- | :------------------------------------------------------ | :------------------ |
+| Bundled specification          | `openapi/bundled/`                                      | no (build output)   |
+| Zod and JSON Schema validators | `generators/zod/generated/`, `dist/`                    | Zod yes, `dist/` no |
+| API collections                | `collections/{postman,insomnia,bruno,hoppscotch}`       | yes                 |
+| MCP tool metadata (65 tools)   | `mcp/tools.json`, `mcp/index.ts`                        | yes                 |
+| Client SDKs                    | `sdk/{typescript,javascript,php,csharp,java,python,go}` | yes                 |
 
-This repository is governed by strict platform rules to guarantee reliability, security, and developer ergonomics:
-
-1. **Contract-First / OpenAPI-First**: Every endpoint, schema, DTO, pagination envelope, error format, and security scheme is defined canonically in `openapi/` using **OpenAPI 3.1.0**.
-2. **Zero Manual Code Editing in Generated Targets**: Generated code in `sdk/*` and collections in `collections/*` are never edited by hand. Modifications are executed exclusively in canonical specifications (`openapi/`) or generator scripts/templates (`generators/`, `templates/`, `scripts/`).
-3. **Multi-Tenancy Isolation**: Every business endpoint enforces tenant resolution via the mandatory `X-Tenant-ID` header (UUID) or verified JWT tenant claims.
-4. **Standardized RFC 9457 Errors**: All error payloads adhere strictly to IETF RFC 9457 (`application/problem+json`) with standard fields: `type`, `title`, `status`, `detail`, `instance`, and `invalidParams`.
-5. **Strict Semantic Versioning (SemVer)**: Automated `oasdiff` breaking-change detection gates block any backward-incompatible API modification on pull requests.
-6. **Token-Efficient Domain Modularization**: OpenAPI paths and components are partitioned into domain directories to ensure human/AI readability and optimal context window usage.
-
----
-
-## 📁 Repository Organization
-
-```text
-fatturafacile-openapi-sdk/
-├── .github/
-│   └── workflows/              # CI/CD, validation, testing, and multi-registry publishing
-├── collections/                # Generated API collections
-│   ├── postman/                # Postman Collection v2.1
-│   ├── insomnia/               # Insomnia v4 Export
-│   ├── bruno/                  # Bruno Collection
-│   └── hoppscotch/             # Hoppscotch Collection
-├── dist/                       # Generated validation schemas
-│   ├── json-schema/            # 46 JSON Schema Draft 2020-12 files
-│   └── zod/                    # Runtime TypeScript Zod schemas
-├── docs/                       # Technical guides (Auth, Tenant, SDK, Errors, Pagination, Security)
-├── examples/                   # Ecosystem integration examples (Laravel, WP, Shopify, Node, Python, .NET, MCP)
-├── generators/                 # Custom generators (Zod, JSON Schema, MCP, Collections)
-├── mcp/                        # Model Context Protocol tools (65 tools), schemas, and TypeScript exports
-├── openapi/                    # Canonical OpenAPI 3.1.0 specifications
-│   ├── openapi.yaml            # Root OpenAPI document
-│   ├── bundled/                # Standalone bundled artifacts (openapi.json, openapi.yaml)
-│   ├── components/             # Reusable schemas, parameters, responses, securitySchemes
-│   └── paths/                  # Modular domain route definitions
-├── scripts/                    # Platform automation scripts (bundle, diff, generate-sdks)
-├── sdk/                        # Official client SDKs across 7 languages
-│   ├── typescript/             # @fatturafacile/sdk (Node.js & Browsers)
-│   ├── javascript/             # fatturafacile-sdk (Vanilla JS / ESM)
-│   ├── php/                    # fatturafacile/sdk-php (PHP 8.2+, Laravel, WordPress)
-│   ├── csharp/                 # FatturaFacile.Sdk (.NET Standard 2.0 & .NET 8)
-│   ├── java/                   # com.fatturafacile:sdk-java (Java 17+)
-│   ├── python/                 # fatturafacile-sdk (Python 3.10+, FastAPI)
-│   └── go/                     # github.com/fatturafacile/fatturafacile-sdk-go (Go 1.22+)
-├── templates/                  # Custom Mustache templates for code generation
-├── tests/                      # Vitest contract, schema, and metadata test suites
-├── Dockerfile                  # Containerized build and validation environment
-├── docker-compose.yml          # Compose orchestration for linting, docs, and generators
-├── package.json                # Workspace dependencies and scripts
-└── pnpm-workspace.yaml         # Monorepo workspace configuration
-```
-
----
-
-## 🏢 Domain Coverage (14 ERP Domains)
-
-| Domain             | Description                                                | Key Modeled Endpoints                                                                          |
-| :----------------- | :--------------------------------------------------------- | :--------------------------------------------------------------------------------------------- |
-| **Authentication** | JWT tokens, refresh rotation, scoped API keys, OAuth2      | `/v1/auth/login`, `/v1/auth/refresh`, `/v1/auth/api-keys`, `/v1/auth/logout`                   |
-| **Users & RBAC**   | Tenant user directory, profile, roles, and permissions     | `/v1/users`, `/v1/users/{id}`, `/v1/roles`, `/v1/profile`                                      |
-| **Companies**      | Legal entities, VAT, Codice Fiscale, PEC, SDI, statistics  | `/v1/companies`, `/v1/companies/{id}`, `/v1/companies/{id}/settings`                           |
-| **Customers**      | B2B/B2C client directory, electronic billing addresses     | `/v1/customers`, `/v1/customers/{id}`                                                          |
-| **Products**       | Catalog, SKU tracking, pricing, stock movements            | `/v1/products`, `/v1/products/{id}`, `/v1/inventory/movements`                                 |
-| **Services**       | Billable consulting, hourly rate definitions               | `/v1/services`, `/v1/services/{id}`                                                            |
-| **Quotes**         | Estimates, quote lines, quote-to-invoice conversion        | `/v1/quotes`, `/v1/quotes/{id}`, `/v1/quotes/{id}/convert`                                     |
-| **Invoices**       | Electronic billing (FatturaPA), SDI dispatch, PDF download | `/v1/invoices`, `/v1/invoices/{id}`, `/v1/invoices/{id}/sdi/transmit`, `/v1/invoices/{id}/pdf` |
-| **Credit Notes**   | Legal credit notes (TD04) linked to invoices               | `/v1/credit-notes`, `/v1/credit-notes/{id}`                                                    |
-| **Payments**       | Installment settlements, refunds, payment methods          | `/v1/payments`, `/v1/payments/{id}`, `/v1/payment-methods`                                     |
-| **Projects**       | Project milestones, deadlines, budget allocations          | `/v1/projects`, `/v1/projects/{id}`                                                            |
-| **Tasks**          | Task boards, assignments, billable time tracking           | `/v1/tasks`, `/v1/tasks/{id}`                                                                  |
-| **Files**          | Multipart file uploads, antivirus scanning, secure storage | `/v1/files/upload`, `/v1/files/{id}`                                                           |
-| **Notifications**  | Real-time user notification stream and unread states       | `/v1/notifications`, `/v1/notifications/{id}/read`                                             |
-
----
-
-## 📦 Multi-Language Client SDKs (7 Languages)
-
-Each official SDK includes built-in exponential backoff retries, rate-limit header parsing (`Retry-After`), automatic tenant context injection (`X-Tenant-ID`), and RFC 9457 error handling.
-
-### 1. TypeScript (`@fatturafacile/sdk`)
+### SDK example (TypeScript)
 
 ```typescript
 import { FatturaFacileClient } from '@fatturafacile/sdk';
 
 const client = new FatturaFacileClient({
-  apiKey: 'ff_live_your_key',
-  tenantId: 'a0000000-0000-0000-0000-000000000001'
+  baseUrl: 'https://api.fatturafacile.eu', // set it explicitly, see the note below
+  apiKey: process.env.FATTURAFACILE_API_KEY,
+  tenantId: '<tenant-uuid>'
 });
 
 const invoices = await client.request('GET', '/v1/invoices?limit=25');
-console.log(invoices);
 ```
 
-### 2. PHP (`fatturafacile/sdk-php`)
+Note: the SDK default for `baseUrl` is `https://api.fatturafacile.eu`; pass `baseUrl` explicitly. Usage in the other languages is in [docs/sdk-usage.md](docs/sdk-usage.md).
 
-```php
-use FatturaFacile\Sdk\Client;
+## Requirements
 
-$client = new Client(
-    apiKey: 'ff_live_your_key',
-    tenantId: 'a0000000-0000-0000-0000-000000000001'
-);
+- Node.js 20 or later
+- pnpm 12 (pinned in `packageManager`; `engines` requires pnpm 9 or later)
+- Docker (optional, see below)
+- Go, Java, Python, PHP and .NET toolchains only when you build the SDK of that language
 
-$invoices = $client->request('GET', '/v1/invoices');
-```
-
-### 3. Python (`fatturafacile-sdk`)
-
-```python
-from fatturafacile_sdk import FatturaFacileClient
-
-client = FatturaFacileClient(
-    api_key="ff_live_your_key",
-    tenant_id="a0000000-0000-0000-0000-000000000001"
-)
-
-invoices = client.request("GET", "/v1/invoices")
-```
-
-### 4. Go (`github.com/fatturafacile/fatturafacile-sdk-go`)
-
-```go
-client := fatturafacile.NewClient(fatturafacile.ClientOptions{
-    APIKey:   "ff_live_your_key",
-    TenantID: "a0000000-0000-0000-0000-000000000001",
-})
-
-var result map[string]interface{}
-err := client.Request(ctx, "GET", "/v1/invoices", nil, &result)
-```
-
-### 5. C# / .NET (`FatturaFacile.Sdk`)
-
-```csharp
-var client = new FatturaFacileClient(new FatturaFacileClientOptions
-{
-    ApiKey = "ff_live_your_key",
-    TenantId = "a0000000-0000-0000-0000-000000000001"
-});
-
-var invoices = await client.SendAsync<object>(HttpMethod.Get, "/v1/invoices");
-```
-
-### 6. Java (`com.fatturafacile:sdk-java`)
-
-```java
-FatturaFacileClient client = new FatturaFacileClient(
-    "https://api.fatturafacile.eu",
-    null,
-    "ff_live_your_key",
-    "a0000000-0000-0000-0000-000000000001"
-);
-
-Map response = client.send("GET", "/v1/invoices", null, Map.class);
-```
-
-### 7. Vanilla JavaScript (`fatturafacile-sdk`)
-
-```javascript
-import { FatturaFacileClient } from 'fatturafacile-sdk';
-
-const client = new FatturaFacileClient({ apiKey: 'ff_live_your_key', tenantId: '...' });
-const customers = await client.request('GET', '/v1/customers');
-```
-
----
-
-## 🤖 Model Context Protocol (MCP) Integration
-
-The repository generates production-ready MCP tooling in `mcp/` containing **65 structured tools**:
-
-- Tool metadata and JSON Schemas: [`mcp/tools.json`](./mcp/tools.json)
-- Programmatic TypeScript export: [`mcp/index.ts`](./mcp/index.ts)
-- Integration Guide: [`examples/mcp-server/index.ts`](./examples/mcp-server/index.ts)
-- AI System Prompt Directive: [`examples/ai-agents/system-prompt-mcp.md`](./examples/ai-agents/system-prompt-mcp.md)
-
-This allows AI assistants (Claude Desktop, Cursor, Copilot, Windsurf) to inspect and execute ERP operations (creating invoices, checking stock, transmitting to SDI) directly and safely.
-
----
-
-## 🛠 Development & Automation Workflow
-
-### Prerequisites
-
-- Node.js >= 20.0.0 (LTS)
-- `pnpm` >= 9.0.0
+## Getting started
 
 ```bash
-# 1. Install workspace dependencies
-pnpm install
+git clone https://github.com/FatturaFacile/openapi-sdk.git
+cd openapi-sdk
+pnpm install --frozen-lockfile
 
-# 2. Lint OpenAPI specifications (Redocly CLI)
-pnpm run lint:openapi
-
-# 3. Bundle OpenAPI specifications into standalone artifacts
-pnpm run bundle:openapi
-
-# 4. Preview interactive API documentation on http://localhost:8080
-pnpm run docs
-
-# 5. Detect breaking changes against base specifications (OASDiff)
-pnpm run test:breaking
-
-# 6. Run all generators (Zod, JSON Schema, MCP, Collections)
-pnpm run generate:all
-
-# 7. Generate client SDKs
-pnpm run generate:sdks
-
-# 8. Run Vitest contract and schema validation test suites
-pnpm test
-
-# 9. Verify code formatting and linting
-pnpm run format:check
-pnpm run lint
+pnpm run lint:openapi      # lint the specification (Redocly)
+pnpm run bundle:openapi    # bundle into openapi/bundled/
+pnpm run docs              # preview the documentation on http://localhost:8080
+pnpm run generate:all      # Zod, JSON Schema, MCP, collections and SDKs
 ```
 
----
+The Docker setup (`docker compose`) offers the same tasks as services: `openapi-tools` (lint), `docs-server` (documentation on port 8080), `sdk-generator` and `test-runner`.
 
-## 🐳 Docker & Containerized Execution
+## Configuration
 
-Build and run the entire validation and generation suite in a containerized environment:
+No environment file is needed. The SDK reads the API key, base URL and tenant from its constructor options.
+
+## Testing and linting
 
 ```bash
-# Build Docker image
-docker-compose build
-
-# Lint specifications
-docker-compose run --rm openapi-tools
-
-# Start live documentation server on port 8080
-docker-compose up docs-server
-
-# Run test suite in container
-docker-compose run --rm test-runner
+pnpm run lint:openapi   # specification
+pnpm run bundle:openapi && pnpm run generate:all   # tests read the generated artifacts, run this first
+pnpm test               # Vitest: contract, schema, collections and MCP metadata tests
+pnpm run test:breaking  # oasdiff breaking-change check
+pnpm run lint           # ESLint on scripts, generators and tests
+pnpm run format:check   # Prettier
 ```
 
----
+`generate:all` rewrites the committed collections and Zod output; commit the result with your change.
 
-## 🚢 CI/CD & Multi-Registry Publishing
+## CI/CD and branching
 
-The repository includes enterprise-grade GitHub Actions workflows:
+- `dev` is the default branch. Open pull requests against `dev`. Production is released from `main` with a GitHub release.
+- `CI` (`ci.yml`) runs on pull requests and on pushes to `main` and `dev`: Redocly lint, bundle, breaking-change check, generators, ESLint and Prettier, build and tests.
+- `Deploy dev` (`deploy-dev.yml`) runs the CI on every push to `dev`.
+- `Release Assets` (`deploy.yml`) runs the CI when a GitHub release is published and attaches the bundled specification and the generated documentation, with checksums.
+- `Publish Multi-Language SDKs` (`publish-sdks.yml`) runs on `v*` tags and publishes the TypeScript SDK to npm, the Python SDK to PyPI and the .NET SDK to NuGet. The PHP, Java and Go SDKs are not published by the workflow yet.
 
-- **`.github/workflows/ci.yml`**: Triggers on pull requests and pushes to `main` and `dev`. Executes Redocly linting, bundling, OASDiff breaking-change checks, generator execution, code linting, formatting checks, and the Vitest test suite.
-- **`.github/workflows/publish-sdks.yml`**: Triggers upon release tag creation (`v*`). Builds bundled specs, generates SDKs, and publishes artifacts across:
-  - **npm**: `@fatturafacile/sdk`
-  - **PyPI**: `fatturafacile-sdk`
-  - **NuGet**: `FatturaFacile.Sdk`
-  - **Packagist**: `fatturafacile/sdk-php`
-  - **Maven Central**: `com.fatturafacile:sdk-java`
-  - **Go Modules**: `github.com/fatturafacile/fatturafacile-sdk-go`
+## Project structure
 
----
+```text
+openapi/        # canonical specification: openapi.yaml, paths/<domain>/, components/
+generators/     # Zod, JSON Schema, MCP and collection generators
+templates/      # Mustache templates for the SDK generators
+scripts/        # bundle, breaking-change check, SDK generation
+sdk/            # generated clients (typescript, javascript, php, csharp, java, python, go)
+collections/    # generated API collections
+mcp/            # generated MCP tool metadata
+tests/          # Vitest suites
+examples/       # usage examples (Node, Python, .NET, Laravel, WordPress/WooCommerce, Shopify, MCP, agents)
+docs/           # guides
+```
 
-## 📚 Documentation Index
+## Related repositories
 
-Detailed platform guides are available under [`docs/`](./docs/):
+| Repository                                                        | Relation                                           |
+| :---------------------------------------------------------------- | :------------------------------------------------- |
+| [`web-api`](https://github.com/FatturaFacile/web-api)             | The Laravel API described by the specification     |
+| [`mcp-server`](https://github.com/FatturaFacile/mcp-server)       | MCP server for the same API                        |
+| [`integrations`](https://github.com/FatturaFacile/integrations)   | Connectors that use a TypeScript client of the API |
+| [`FatturaFacile`](https://github.com/FatturaFacile/FatturaFacile) | Organization overview and repository map           |
 
-1. [API Reference & Overview](./docs/index.md)
-2. [Authentication & Authorization Guide](./docs/auth.md)
-3. [Multi-Tenancy & Isolation Guide](./docs/multi-tenancy.md)
-4. [SDK Usage Guide Across 7 Languages](./docs/sdk-usage.md)
-5. [RFC 9457 Problem Details Error Guide](./docs/errors.md)
-6. [Pagination, Filtering, Sorting & Search Guide](./docs/pagination-filtering-search.md)
-7. [Semantic Versioning & Compatibility Policy](./docs/versioning-compatibility.md)
-8. [Security Standards & Data Protection](./docs/security.md)
+## Documentation
 
----
+- [API overview](docs/index.md), [authentication](docs/auth.md), [multi-tenancy](docs/multi-tenancy.md), [SDK usage](docs/sdk-usage.md), [errors](docs/errors.md), [pagination, filtering and search](docs/pagination-filtering-search.md), [versioning](docs/versioning-compatibility.md), [security](docs/security.md)
+- Project wiki: [FatturaFacile/FatturaFacile wiki](https://github.com/FatturaFacile/FatturaFacile/wiki)
 
-## 🤝 Contributing & Governance
+## Contributing
 
-Contributions to API contracts must follow the Contract-First methodology:
+Make API changes in `openapi/paths/` and `openapi/components/`, reuse the shared schemas in `openapi/components/schemas/common/`, then run `lint:openapi`, `test:breaking`, `generate:all` and `test` as above.
 
-1. Make all additions or modifications in `openapi/paths/` and `openapi/components/`.
-2. Ensure no schema duplication; reuse shared models in `openapi/components/schemas/common/`.
-3. Validate that `pnpm run lint:openapi` passes with **0 errors and 0 warnings**.
-4. Run `pnpm run test:breaking` to verify backward compatibility.
-5. Re-run `pnpm run generate:all` to keep Zod, JSON Schema, MCP, and Collections in sync.
-6. Verify all tests pass with `pnpm test`.
+## License
 
----
-
-## 📄 License
-
-This repository and all generated artifacts are open-source software licensed under the [MIT License](./LICENSE).
+[MIT](LICENSE)
