@@ -46,7 +46,7 @@ Note: the SDK default for `baseUrl` is `https://api.fatturafacile.com`; pass `ba
 
 ## Requirements
 
-- Node.js 20 or later
+- Node.js 24 or later
 - pnpm 12 (pinned in `packageManager`; `engines` requires pnpm 9 or later)
 - Docker (optional, see below)
 - Go, Java, Python, PHP and .NET toolchains only when you build the SDK of that language

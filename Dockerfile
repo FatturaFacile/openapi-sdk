@@ -1,5 +1,5 @@
 # Base image with Node.js LTS and OpenJDK for OpenAPI Generator CLI
-FROM node:20-bookworm-slim
+FROM node:24-bookworm-slim
 
 # Install OpenJDK 17, Python 3, Git, and build tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
